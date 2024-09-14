@@ -21,8 +21,8 @@
 ### 1. Клонируйте репозиторий
 
 ```
-git clone https://your-repo-url.git
-cd your-repo
+git clone https://github.com/artwist-polyakov/OpenAIAssistantBot.git
+cd OpenAIAssistantBot
 ```
 
 ### 2. Создайте файл .env
@@ -48,7 +48,7 @@ HISTORY_DEPTH=5
 Убедитесь, что Docker и Docker Compose установлены, затем выполните:
 
 ```
-docker-compose up --build
+docker-compose up -d --build
 ```
 
 Эта команда соберёт Docker образ и запустит бота.

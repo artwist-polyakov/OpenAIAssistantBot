@@ -1,7 +1,6 @@
-version: '3.8'
-
 services:
   bot:
+    container_name: ${CONTAINER_NAME}
     build: ./src
     env_file:
       - .env

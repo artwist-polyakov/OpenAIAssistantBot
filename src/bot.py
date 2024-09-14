@@ -4,6 +4,7 @@ import logging
 from dotenv import load_dotenv, set_key
 from openai import AsyncOpenAI
 from telegram import Update
+from telegram.constants import ChatAction
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
 
 load_dotenv()
@@ -74,16 +75,17 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text('У вас нет доступа к боту.')
         return
 
+    await context.bot.send_chat_action(chat_id=update.effective_chat.id, action=ChatAction.TYPING)
+
     # Получение истории пользователя
     history = user_histories.get(user_id, [])
 
     # Подготовка сообщений для ассистента
     messages = []
     if update.message.reply_to_message and history:
-        # Включаем предысторию в сообщения
-        for q, a in history:
+        # Включаем только предыдущие сообщения пользователя
+        for q, _ in history:
             messages.append({'role': 'user', 'content': q})
-            messages.append({'role': 'assistant', 'content': a})
     # Добавляем новое сообщение пользователя
     messages.append({'role': 'user', 'content': update.message.text})
 

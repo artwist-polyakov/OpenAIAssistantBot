@@ -48,7 +48,7 @@ HISTORY_DEPTH=5
 Убедитесь, что Docker и Docker Compose установлены, затем выполните:
 
 ```
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 Эта команда соберёт Docker образ и запустит бота.

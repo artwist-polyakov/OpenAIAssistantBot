@@ -27,6 +27,13 @@ cd OpenAIAssistantBot
 
 ### 2. Создайте файл .env
 
+```
+
+cp .env.example .env
+nano .env
+
+```
+
 Создайте файл .env в корневой директории со следующими переменными:
 
 ```

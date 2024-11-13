@@ -41,14 +41,12 @@ BOT_TOKEN=ваш_токен_телеграм_бота
 OPENAI_API_KEY=ваш_openai_api_key
 ASSISTANT_ID=ваш_assistant_id
 USERS=список_разрешенных_имен_пользователей_через_запятую_или_*
-HISTORY_DEPTH=5
 ```
 
 - BOT_TOKEN: Токен вашего Telegram бота.
 - OPENAI_API_KEY: Ваш API ключ OpenAI.
 - ASSISTANT_ID: ID вашего ассистента OpenAI.
 - USERS: Список имён пользователей Telegram, которым разрешён доступ к боту. Используйте *, чтобы снять ограничения.
-- HISTORY_DEPTH: Максимальное количество пар вопрос-ответ в истории для каждого пользователя.
 
 ### 3. Соберите и запустите Docker контейнер
 

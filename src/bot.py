@@ -15,7 +15,8 @@ from telegram.ext import (
     CommandHandler,
     MessageHandler,
     filters,
-    JobQueue
+    JobQueue,
+    Application
 )
 
 load_dotenv()
@@ -180,12 +181,17 @@ async def init_bot(application):
     bot_info = await application.bot.get_me()
     logging.info(f"Bot initialized: @{bot_info.username}")
 
+async def post_init(application: Application) -> None:
+    """Пост-инициализация приложения"""
+    await init_bot(application)
+
 def main():
     # Включаем job_queue при создании приложения
     application = (
         ApplicationBuilder()
         .token(BOT_TOKEN)
         .job_queue(JobQueue())
+        .post_init(post_init)  # Добавляем пост-инициализацию
         .build()
     )
 
@@ -197,9 +203,6 @@ def main():
         await cleanup_old_threads()
 
     application.job_queue.run_repeating(cleanup_job, interval=3600)
-
-    # Инициализируем бота перед запуском
-    application.run_async(init_bot(application))
 
     # Запускаем бота
     application.run_polling()

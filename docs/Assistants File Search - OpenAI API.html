@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://platform.openai.com/docs/assistants/tools/file-search -->
+<html lang="en" class="light zzybchhgbjn idc0_343 nnqklbde idc0_350" data-theme="light" style="color-scheme: light;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <link rel="icon" type="image/png" href="https://platform.openai.com/favicon-docs.png">
+        <link rel="icon" type="image/svg+xml" href="https://platform.openai.com/favicon-docs.svg">
+        <link rel="preconnect" href="https://cdn.openai.com/">
+        <link rel="preconnect" href="https://owz3qoiija-dsn.algolia.net/" crossorigin="">
+        <!-- Preload critical fonts (400 and 500 weight Söhne) -->
+        <link rel="preload" href="https://cdn.openai.com/common/fonts/soehne/soehne-buch.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="https://cdn.openai.com/common/fonts/soehne/soehne-kraftig.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#000000">
+        <title>Assistants File Search - OpenAI API</title>
+        <meta name="description" content="Explore resources, tutorials, API docs, and dynamic examples to get the most out of OpenAI&#39;s developer platform.">
+        <link rel="manifest" href="https://platform.openai.com/manifest.json">
+
+        <!-- Facebook / LinkedIn Meta Tags -->
+        <meta property="og:title" content="OpenAI Platform">
+        <meta property="og:image" content="https://cdn.openai.com/API/images/opengraph.png">
+        <meta property="og:description" content="Explore developer resources, tutorials, API docs, and dynamic examples to get the most out of OpenAI&#39;s platform.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://platform.openai.com">
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="platform.openai.com">
+        <meta property="twitter:url" content="https://platform.openai.com">
+        <meta name="twitter:title" content="OpenAI Platform">
+        <meta name="twitter:description" content="Explore developer resources, tutorials, API docs, and dynamic examples to get the most out of OpenAI&#39;s platform.">
+        <meta name="twitter:image" content="https://cdn.openai.com/API/images/opengraph.png">
+      <script type="text/javascript" async="" src="./Assistants File Search - OpenAI API_files/dgkjq2bp"></script><script nonce="" type="module" crossorigin="" src="./Assistants File Search - OpenAI API_files/index-DCsEGPNw.js"></script>
+      <link rel="stylesheet" crossorigin="" href="./Assistants File Search - OpenAI API_files/CpqoilUDHV.css">
+      <script nonce="" type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();if(location.protocol!="file:"){window.__vite_is_modern_browser=true}</script>
+      <script nonce="" type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
+    <style id="_goober"> @keyframes go2264125279{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go3020080000{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}@keyframes go463499852{from{transform:scale(0) rotate(90deg);opacity:0;}to{transform:scale(1) rotate(90deg);opacity:1;}}@keyframes go1268368563{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}@keyframes go1310225428{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go651618207{0%{height:0;width:0;opacity:0;}40%{height:0;width:6px;opacity:1;}100%{opacity:1;height:10px;}}@keyframes go901347462{from{transform:scale(0.6);opacity:0.4;}to{transform:scale(1);opacity:1;}}.go4109123758{z-index:9999;}.go4109123758 > *{pointer-events:auto;}</style><link type="text/css" title="Grazie Fonts" rel="stylesheet" href="chrome-extension://fonaoompfjljjllgccccgjnhnoghohgc/fonts/fonts.css"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/DH0LCh0uuL.js"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/JWXutY_VjD.js"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/Cf0TF1uTrT.css"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/BUS9mDWJCH.js"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/DsVpO-EsqN.css"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/BnxwaOs8C6.css"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/DWeFEq1DGD.js"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/MO_ofJECOE.js"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/C9MBEX7jPb.css"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/CAVOXPWcrL.js"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/B-Mx0LBywD.js"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/DOkCxdEYQX.css"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/CgEaZ2c4xu.css"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/De2ANSpMS7.js"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/BcVuTNeXED.js"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/Dw6msFFe5J.css"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/BX1cFz3gw4.js"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/CqixEuwzFo.css"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/ZMOI28gQfS.js"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/Brv3mx-Tbl.js"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/BedhPRsuQD.js"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/DI7gBV1kZG.js"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/DIeb_u41mF.js"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/BM-IyrSiBW.js"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/Bs3YvRBCiE.css"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/wLyaZ8Z1CP.js"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/0XQOeb1Mw_.css"><link rel="modulepreload" as="script" crossorigin="" href="https://platform.openai.com/static/-XN-P3gkDs.js"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/CTizYPn87R.css"><link rel="stylesheet" href="./Assistants File Search - OpenAI API_files/nqz1xM0xY-.css"><style data-emotion="css" data-s=""></style></head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root"><div class="rl7uK"><div class="hDvly"><div class="vpev1"><div class="_5Amyn"><button id="select-trigger-radix-:r0:" type="button" class="ICo9Y" data-variant="bare" data-size="lg" data-gutter-size="sm" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r2:" data-state="closed" style="--scale: 0.98;"><span class="RWOJJ"><span class="flex items-center gap-2 font-medium"><span class="qCm0E" role="presentation" data-variant="dark" style="--avatar-size: 25px; --avatar-initial-nudge: 0px;"><div class="_9uyMP">P</div></span>Personal</span></span><div class="relative flex items-center gap-2"><svg width="8" height="11" viewBox="0 0 10 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="uF-Qb"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.34151 0.747423C4.71854 0.417526 5.28149 0.417526 5.65852 0.747423L9.65852 4.24742C10.0742 4.61111 10.1163 5.24287 9.75259 5.6585C9.38891 6.07414 8.75715 6.11626 8.34151 5.75258L5.00001 2.82877L1.65852 5.75258C1.24288 6.11626 0.61112 6.07414 0.247438 5.6585C-0.116244 5.24287 -0.0741267 4.61111 0.34151 4.24742L4.34151 0.747423ZM0.246065 10.3578C0.608879 9.94139 1.24055 9.89795 1.65695 10.2608L5.00001 13.1737L8.34308 10.2608C8.75948 9.89795 9.39115 9.94139 9.75396 10.3578C10.1168 10.7742 10.0733 11.4058 9.65695 11.7687L5.65695 15.2539C5.28043 15.582 4.7196 15.582 4.34308 15.2539L0.343082 11.7687C-0.0733128 11.4058 -0.116749 10.7742 0.246065 10.3578Z"></path></svg></div></button><div class="u-pgg">/</div><button id="select-trigger-radix-:r3:" type="button" class="ICo9Y" data-variant="bare" data-size="lg" data-gutter-size="sm" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r5:" data-state="closed" style="--scale: 0.98;"><span class="RWOJJ"><span class="font-medium" style="color: var(--text-default);">Default project</span></span><div class="relative flex items-center gap-2"><svg width="8" height="11" viewBox="0 0 10 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="uF-Qb"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.34151 0.747423C4.71854 0.417526 5.28149 0.417526 5.65852 0.747423L9.65852 4.24742C10.0742 4.61111 10.1163 5.24287 9.75259 5.6585C9.38891 6.07414 8.75715 6.11626 8.34151 5.75258L5.00001 2.82877L1.65852 5.75258C1.24288 6.11626 0.61112 6.07414 0.247438 5.6585C-0.116244 5.24287 -0.0741267 4.61111 0.34151 4.24742L4.34151 0.747423ZM0.246065 10.3578C0.608879 9.94139 1.24055 9.89795 1.65695 10.2608L5.00001 13.1737L8.34308 10.2608C8.75948 9.89795 9.39115 9.94139 9.75396 10.3578C10.1168 10.7742 10.0733 11.4058 9.65695 11.7687L5.65695 15.2539C5.28043 15.582 4.7196 15.582 4.34308 15.2539L0.343082 11.7687C-0.0733128 11.4058 -0.116749 10.7742 0.246065 10.3578Z"></path></svg></div></button></div></div><div class="Aip-a"><nav class="okBd0"><a class="w9s17" data-primary-nav-item="" href="https://platform.openai.com/playground"><span class="EsOWR vaD2P" data-title="Playground">Playground</span><span class="EsOWR ksWxL" data-title="Playground">Playground</span></a><a class="w9s17" data-primary-nav-item="" href="https://platform.openai.com/chat-completions"><span class="EsOWR vaD2P" data-title="Dashboard">Dashboard</span><span class="EsOWR ksWxL" data-title="Dashboard">Dashboard</span></a><a aria-current="page" class="w9s17 _1T-tk" data-primary-nav-item="" href="https://platform.openai.com/docs"><span class="EsOWR vaD2P" data-title="Docs">Docs</span><span class="EsOWR ksWxL" data-title="Docs">Docs</span></a><a class="w9s17" data-primary-nav-item="" href="https://platform.openai.com/docs/api-reference/assistants"><span class="EsOWR vaD2P" data-title="API reference">API reference</span><span class="EsOWR ksWxL" data-title="API">API</span></a></nav><a class="nav-item KAMRO" href="https://platform.openai.com/settings"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" aria-haspopup="true" aria-expanded="false"><path fill-rule="evenodd" d="M11.568 3.5a1 1 0 0 0-.863.494l-.811 1.381A3.001 3.001 0 0 1 7.33 6.856l-1.596.013a1 1 0 0 0-.858.501l-.439.761a1 1 0 0 0-.004.992l.792 1.4a3 3 0 0 1 0 2.954l-.792 1.4a1 1 0 0 0 .004.992l.439.76a1 1 0 0 0 .858.502l1.596.013a3 3 0 0 1 2.564 1.48l.811 1.382a1 1 0 0 0 .863.494h.87a1 1 0 0 0 .862-.494l.812-1.381a3.001 3.001 0 0 1 2.563-1.481l1.596-.013a1 1 0 0 0 .86-.501l.438-.761a1 1 0 0 0 .004-.992l-.793-1.4a3 3 0 0 1 0-2.954l.793-1.4a1 1 0 0 0-.004-.992l-.439-.76a1 1 0 0 0-.858-.502l-1.597-.013a3 3 0 0 1-2.563-1.48L13.3 3.993a1 1 0 0 0-.862-.494h-.87ZM8.98 2.981A3.001 3.001 0 0 1 11.568 1.5h.87c1.064 0 2.049.564 2.588 1.481l.811 1.382a1 1 0 0 0 .855.494l1.596.013a3 3 0 0 1 2.575 1.502l.44.76a3 3 0 0 1 .011 2.975l-.792 1.4a1 1 0 0 0 0 .985l.792 1.401a3 3 0 0 1-.012 2.974l-.439.761a3.001 3.001 0 0 1-2.575 1.503l-1.597.012a1 1 0 0 0-.854.494l-.811 1.382a3.001 3.001 0 0 1-2.588 1.481h-.87a3.001 3.001 0 0 1-2.588-1.481l-.811-1.382a1 1 0 0 0-.855-.494l-1.596-.012a3.001 3.001 0 0 1-2.576-1.503l-.438-.76a3 3 0 0 1-.013-2.975l.793-1.4a1 1 0 0 0 0-.985l-.793-1.4a3 3 0 0 1 .013-2.975l.438-.761A3.001 3.001 0 0 1 5.718 4.87l1.596-.013a1 1 0 0 0 .855-.494l.81-1.382Z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M12.003 10.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM8.502 12a3.5 3.5 0 1 1 7 .001 3.5 3.5 0 0 1-7-.001Z" clip-rule="evenodd"></path></svg></a><div class="LwKwt"><button class="jYGOC" type="button" id="radix-:r7:" aria-haspopup="menu" aria-expanded="false" data-state="closed"><span class="qCm0E" role="presentation" data-variant="light"><div class="_9uyMP">A</div></span></button></div></div><div class="_3fO9I"><svg xmlns="http://www.w3.org/2000/svg" width="157" height="24" fill="currentColor" viewBox="0 0 158 24"><path fill-rule="evenodd" d="M22.486 7.312a5.98 5.98 0 0 1-.273 2.51 6.048 6.048 0 0 1 .747 7.088 5.979 5.979 0 0 1-3.998 2.9A6.047 6.047 0 0 1 13.19 24a5.976 5.976 0 0 1-4.51-2.01 6.047 6.047 0 0 1-6.512-2.902 5.98 5.98 0 0 1-.513-4.91 6.048 6.048 0 0 1-.745-7.09 5.982 5.982 0 0 1 3.998-2.901A6.048 6.048 0 0 1 10.677 0a5.979 5.979 0 0 1 4.51 2.01 6.047 6.047 0 0 1 6.512 2.902c.43.734.699 1.553.787 2.4ZM10.313 21.39c.808.674 1.732 1.041 2.926 1.041 2.34 0 4.447-1.968 4.447-4.5v-5.577a.072.072 0 0 0-.04-.055l-2.02-1.166v6.736a.777.777 0 0 1-.392.68l-4.779 2.76a3.255 3.255 0 0 1-.142.081Zm-7.32-6.1a4.482 4.482 0 0 0 .536 3.014 4.502 4.502 0 0 0 6.143 1.646l4.831-2.79a.071.071 0 0 0 .029-.061v-2.333l-5.834 3.369a.777.777 0 0 1-.785 0l-4.779-2.76a6.528 6.528 0 0 1-.142-.085ZM4.61 5.9a4.483 4.483 0 0 0-2.34 1.972 4.502 4.502 0 0 0 1.648 6.141l4.83 2.792a.073.073 0 0 0 .069-.006l2.02-1.166-5.834-3.369a.774.774 0 0 1-.392-.68V5.9Zm8.421 2.465 5.834 3.369a.775.775 0 0 1 .39.679v5.686a4.499 4.499 0 0 0 .695-8.116l-4.83-2.79a.073.073 0 0 0-.069.006l-2.02 1.166Zm7.703.256.142.085a4.498 4.498 0 0 0-6.68-4.658l-4.83 2.787a.073.073 0 0 0-.029.062V9.23l5.834-3.37a.779.779 0 0 1 .785 0l4.779 2.761ZM6.219 11.7l2.02 1.166.003-6.734a.777.777 0 0 1 .393-.68l4.779-2.76c.042-.026.105-.06.142-.08a4.498 4.498 0 0 0-7.377 3.453v5.58a.07.07 0 0 0 .04.055ZM11.934 9l-2.598 1.5v3l2.598 1.5 2.599-1.5v-3L11.935 9Z" clip-rule="evenodd"></path><path d="M86.888 5.287v13.12H84.55V5.287h2.34Zm-11 0h2.65l4.97 13.12h-2.357l-1.133-2.997h-5.665l-1.114 2.997h-2.321l4.97-13.12Zm1.28 2.595-2.047 5.482h4.13l-2.084-5.482ZM61.974 18.407V8.813h2.193v1.024a3.385 3.385 0 0 1 2.649-1.206c2.01 0 3.216 1.389 3.216 3.453v6.323H67.84v-5.683c0-1.188-.475-2.047-1.68-2.047-.988 0-1.993.731-1.993 2.102v5.628h-2.192Zm-5.428.201c-2.741 0-4.66-2.029-4.66-4.989 0-2.814 1.9-4.988 4.569-4.988 2.777 0 4.257 2.101 4.257 4.732v.731h-6.724c.164 1.645 1.15 2.65 2.558 2.65 1.078 0 1.937-.548 2.23-1.535l1.881.713c-.676 1.68-2.192 2.686-4.111 2.686Zm-.11-8.132c-1.133 0-2.01.676-2.339 1.974h4.404c-.018-1.06-.676-1.974-2.065-1.974Zm-9.478 8.132c-1.243 0-2.157-.494-2.76-1.206v4.294h-2.193V8.813h2.193v1.024c.603-.713 1.517-1.206 2.76-1.206 2.686 0 4.22 2.266 4.22 4.988 0 2.723-1.534 4.989-4.22 4.989Zm-2.814-5.263v.567c0 1.772 1.023 2.777 2.375 2.777 1.59 0 2.449-1.242 2.449-3.07 0-1.827-.86-3.07-2.449-3.07-1.352 0-2.375.987-2.375 2.796Zm-15.687-1.498c0-3.984 2.558-6.761 6.103-6.761s6.103 2.777 6.103 6.76c0 3.984-2.558 6.762-6.103 6.762s-6.103-2.778-6.103-6.761Zm9.867 0c0-2.85-1.553-4.696-3.764-4.696s-3.764 1.845-3.764 4.696c0 2.85 1.553 4.696 3.764 4.696 2.21 0 3.764-1.846 3.764-4.696Zm107.383.84v5.72h-1.644V8.85h1.644v1.297a3.208 3.208 0 0 1 2.759-1.48c1.28 0 2.175.64 2.65 1.627.53-.786 1.553-1.627 3.052-1.627 1.973 0 3.161 1.407 3.161 3.436v6.304h-1.645V12.54c0-1.334-.548-2.339-1.9-2.339-1.096 0-2.266.932-2.266 2.485v5.72h-1.644V12.54c0-1.334-.549-2.339-1.901-2.339-1.096 0-2.266.932-2.266 2.485Zm-3.072-3.874v1.663a3.758 3.758 0 0 0-.804-.073c-1.389 0-2.503 1.097-2.503 2.778v5.226h-1.645V8.85h1.645v1.626c.42-.968 1.352-1.7 2.649-1.7.256 0 .494.02.658.037Zm-6.66 4.825c0 2.96-1.827 4.97-4.44 4.97-2.613 0-4.44-2.01-4.44-4.97s1.827-4.97 4.44-4.97c2.613 0 4.44 2.01 4.44 4.97Zm-7.217 0c0 2.174 1.096 3.563 2.777 3.563s2.778-1.389 2.778-3.563c0-2.193-1.097-3.582-2.778-3.582s-2.777 1.389-2.777 3.582Zm-2.005-8.516v1.462c-.274-.036-.439-.036-.713-.036-.968 0-1.498.42-1.498 1.644v.658h2.12v1.407h-2.12v8.15h-1.645v-8.15h-2.225V8.85h2.225v-.767c0-1.864 1.024-2.997 2.979-2.997.329 0 .511.018.877.036Z"></path><path d="M117.195 16.123v-5.866h-1.48V8.85h1.48V6.054h1.626V8.85h2.174v1.407h-2.174v5.61c0 1.005.493 1.188 1.334 1.188a4.03 4.03 0 0 0 1.041-.11v1.407c-.42.091-.895.146-1.443.146-1.626 0-2.558-.548-2.558-2.375Zm-7.097 2.448c-1.736 0-3.143-1.023-3.143-2.74 0-1.901 1.48-2.687 3.618-3.125l2.321-.476v-.402c0-1.096-.603-1.717-1.882-1.717-1.206 0-1.919.566-2.211 1.626l-1.554-.402c.457-1.553 1.864-2.668 3.82-2.668 2.137 0 3.453 1.042 3.453 3.088v4.66c0 .621.384.822 1.023.676v1.316c-1.461.183-2.302-.165-2.503-1.078-.585.749-1.645 1.242-2.942 1.242Zm2.796-3.417V13.51l-1.864.402c-1.462.292-2.449.694-2.449 1.845 0 .932.676 1.48 1.718 1.48 1.407 0 2.595-.858 2.595-2.083Zm-7.551-9.867v13.12h-1.645V5.287h1.645Zm-10.658 7.62v5.5H92.93V5.287h5.006c2.778 0 4.55 1.297 4.55 3.8 0 2.468-1.772 3.82-4.55 3.82h-3.252Zm0-1.517h3.161c1.864 0 2.905-.822 2.905-2.302s-1.041-2.285-2.905-2.285h-3.161v4.587Z"></path></svg></div></div><main class="unjkE" data-sidebar="expanded" data-mobile-menu="hidden"><aside class="EpwGB"><div class="GVIPA"><div class="JGDzZ"><div class="fKGG4"><div class="NmUvH"><div class="_00hoS"><div class="aTuAl"><div class="_0MyKb qyrrQ"><div class="search"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key">⌘</kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button></div></div><div class="DH-HY qyrrQ QeXPj"><div class="side-nav-section"><div class="side-nav-header subheading">Get started</div><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/overview"><span class="side-nav-item-name">Overview</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/quickstart"><span class="side-nav-item-name">Quickstart</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/models"><span class="side-nav-item-name">Models</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/changelog"><span class="side-nav-item-name">Changelog</span></a><a href="https://openai.com/policies" class="scroll-link side-nav-item" target="_blank" rel="noreferrer"><span class="side-nav-item-name">Terms and policies</span><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" class="side-nav-icon"><path fill-rule="evenodd" d="M15 5a1 1 0 1 1 0-2h5a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0V6.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L17.586 5H15ZM4 7a3 3 0 0 1 3-3h3a1 1 0 1 1 0 2H7a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 1 1 2 0v3a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7Z" clip-rule="evenodd"></path></svg></a></div><div class="side-nav-section"><div class="side-nav-header subheading">Capabilities</div><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/text-generation"><span class="side-nav-item-name">Text generation</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/images"><span class="side-nav-item-name">Image generation</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/vision"><span class="side-nav-item-name">Vision</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/audio"><span class="side-nav-item-name">Audio generation</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/text-to-speech"><span class="side-nav-item-name">Text to speech</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/speech-to-text"><span class="side-nav-item-name">Speech to text</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/embeddings"><span class="side-nav-item-name">Embeddings</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/moderation"><span class="side-nav-item-name">Moderation</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/reasoning"><span class="side-nav-item-name">Reasoning</span></a></div><div class="side-nav-section"><div class="side-nav-header subheading">Guides</div><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/function-calling"><span class="side-nav-item-name">Function calling</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/structured-outputs"><span class="side-nav-item-name">Structured Outputs</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/predicted-outputs"><span class="side-nav-item-name">Predicted Outputs</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/evals"><span class="side-nav-item-name">Evaluations</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/fine-tuning"><span class="side-nav-item-name">Fine-tuning</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/distillation"><span class="side-nav-item-name">Distillation</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/realtime"><span class="side-nav-item-name">Realtime API</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/batch"><span class="side-nav-item-name">Batch API</span></a></div><div class="side-nav-section"><div class="side-nav-header subheading">Assistants</div><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/assistants/overview"><span class="side-nav-item-name">Overview</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/assistants/quickstart"><span class="side-nav-item-name">Quickstart</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/assistants/deep-dive"><span class="side-nav-item-name">Deep dive</span></a><a class="scroll-link side-nav-item side-nav-item-has-subitems active" data-side-nav-subitems="visible" href="https://platform.openai.com/docs/assistants/tools"><span class="side-nav-item-name">Tools</span><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" class="side-nav-mobile-chevron"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></a><div class="side-nav-subitems"><a class="scroll-link side-nav-item side-nav-child active active-exact" href="https://platform.openai.com/docs/assistants/tools/file-search"><span class="side-nav-item-name">File search</span></a><a class="scroll-link side-nav-item side-nav-child" href="https://platform.openai.com/docs/assistants/tools/code-interpreter"><span class="side-nav-item-name">Code interpreter</span></a><a class="scroll-link side-nav-item side-nav-child" href="https://platform.openai.com/docs/assistants/tools/function-calling"><span class="side-nav-item-name">Function calling</span></a></div><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/assistants/whats-new"><span class="side-nav-item-name">What's new?</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/assistants/migration"><span class="side-nav-item-name">Migration guide</span></a></div><div class="side-nav-section"><div class="side-nav-header subheading">ChatGPT</div><a class="scroll-link side-nav-item side-nav-item-has-subitems" data-side-nav-subitems="hidden" href="https://platform.openai.com/docs/actions"><span class="side-nav-item-name">Actions</span><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" class="side-nav-mobile-chevron"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/gpts/release-notes"><span class="side-nav-item-name">Release notes</span></a></div><div class="side-nav-section"><div class="side-nav-header subheading">Best practices</div><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/prompt-engineering"><span class="side-nav-item-name">Prompt engineering</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/production-best-practices"><span class="side-nav-item-name">Production best practices</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/safety-best-practices"><span class="side-nav-item-name">Safety best practices</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/prompt-caching"><span class="side-nav-item-name">Prompt Caching</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/model-selection"><span class="side-nav-item-name">Model selection</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/latency-optimization"><span class="side-nav-item-name">Latency optimization</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/optimizing-llm-accuracy"><span class="side-nav-item-name">Accuracy optimization</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/advanced-usage"><span class="side-nav-item-name">Advanced usage</span></a></div><div class="side-nav-section"><div class="side-nav-header subheading">Resources</div><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/libraries"><span class="side-nav-item-name">Libraries</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/examples"><span class="side-nav-item-name">Prompt examples</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/rate-limits"><span class="side-nav-item-name">Rate limits</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/prompt-generation"><span class="side-nav-item-name">Prompt generation</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/guides/error-codes"><span class="side-nav-item-name">Error codes</span></a><a class="scroll-link side-nav-item" href="https://platform.openai.com/docs/deprecations"><span class="side-nav-item-name">Deprecations</span></a></div></div></div></div></div></div></div></div><div class="EDOEc qyrrQ"><div class="q3jBs"><a href="https://cookbook.openai.com/" target="_blank" rel="noopener noreferrer" class="-ySo1 FDGXZ" aria-haspopup="true" aria-expanded="false"><span class="_1h-SG"><span class="-k7Gw"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M14.447 7.106a1 1 0 0 1 .447 1.341l-4 8a1 1 0 1 1-1.788-.894l4-8a1 1 0 0 1 1.341-.447ZM6.6 7.2a1 1 0 0 1 .2 1.4L4.25 12l2.55 3.4a1 1 0 0 1-1.6 1.2l-3-4a1 1 0 0 1 0-1.2l3-4a1 1 0 0 1 1.4-.2Zm10.8 0a1 1 0 0 1 1.4.2l3 4a1 1 0 0 1 0 1.2l-3 4a1 1 0 0 1-1.6-1.2l2.55-3.4-2.55-3.4a1 1 0 0 1 .2-1.4Z" clip-rule="evenodd"></path></svg></span><span class="_0LIzz">Cookbook</span></span></a><a href="https://community.openai.com/categories" target="_blank" rel="noopener noreferrer" class="-ySo1 FDGXZ" aria-haspopup="true" aria-expanded="false"><span class="_1h-SG"><span class="-k7Gw"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10.5 8.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM12 5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7ZM3 9.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm1-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm16 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-3 1a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM8 18c0-.974.438-1.684 1.142-2.185C9.876 15.293 10.911 15 12 15c1.09 0 2.124.293 2.858.815.704.5 1.142 1.21 1.142 2.185a1 1 0 1 0 2 0c0-1.692-.812-2.982-1.983-3.815C14.876 13.373 13.411 13 12 13c-1.41 0-2.876.373-4.017 1.185C6.812 15.018 6 16.308 6 18a1 1 0 1 0 2 0Zm-3.016-3.675a1 1 0 0 1-.809 1.16C2.79 15.732 2 16.486 2 17.5a1 1 0 1 1-2 0c0-2.41 1.978-3.655 3.825-3.985a1 1 0 0 1 1.16.81Zm14.84 1.16a1 1 0 1 1 .351-1.97C22.022 13.845 24 15.09 24 17.5a1 1 0 1 1-2 0c0-1.014-.79-1.768-2.175-2.015Z" clip-rule="evenodd"></path></svg></span><span class="_0LIzz">Forum</span></span></a><button class="-ySo1 FDGXZ" aria-haspopup="true" aria-expanded="false"><span class="_1h-SG"><span class="-k7Gw"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M12 9a1 1 0 0 0-.879.522 1 1 0 0 1-1.754-.96A3 3 0 0 1 12 7c1.515 0 2.567 1.006 2.866 2.189.302 1.189-.156 2.574-1.524 3.258A.618.618 0 0 0 13 13a1 1 0 1 1-2 0c0-.992.56-1.898 1.447-2.342.455-.227.572-.618.48-.978C12.836 9.314 12.529 9 12 9Z" clip-rule="evenodd"></path><path d="M13.1 16a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"></path></svg></span><span class="_0LIzz">Help</span></span></button></div></div></aside><div class="_7j8ow"><div class="qLnXc"><div class="JGDzZ"><div class="fKGG4"><div class="NmUvH"><div class="_00hoS"><div class="ImBcX"><div class="docs-scroll-container" data-important-algolia-crawl="true"><div class="page-body full-width flush docs-page"><div class="markdown-page markdown-content assistants-tools"><div class="flex w-full items-start"><div class="flex-1 overflow-hidden"><h1 class="markdown-page-title">Assistants File Search<div class="qB3Oq" data-color="warning" data-size="sm" data-variant="filled"><span class="BWpH-" data-size="sm">Beta</span></div></h1><p>File Search augments the Assistant with knowledge from outside its model, such as proprietary product information or documents provided by your users. OpenAI automatically parses and chunks your documents, creates and stores the embeddings, and use both vector and keyword search to retrieve relevant content to answer user queries.</p>
+<div class="anchor-heading-wrapper"><h2 id="quickstart" class="anchor-heading" data-name="quickstart">Quickstart<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h2></div>
+<p>In this example, we’ll create an assistant that can help answer questions about companies’ financial statements.</p>
+<div class="anchor-heading-wrapper"><h3 id="step-1-create-a-new-assistant-with-file-search-enabled" class="anchor-heading" data-name="step-1-create-a-new-assistant-with-file-search-enabled">Step 1: Create a new Assistant with File Search Enabled<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h3></div>
+<p>Create a new assistant with <code>file_search</code> enabled in the <code>tools</code> parameter of the Assistant.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option><option value="curl">curl</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span><span class="react-syntax-highlighter-line-number">5
+</span><span class="react-syntax-highlighter-line-number">6
+</span><span class="react-syntax-highlighter-line-number">7
+</span><span class="react-syntax-highlighter-line-number">8
+</span><span class="react-syntax-highlighter-line-number">9
+</span><span class="react-syntax-highlighter-line-number">10
+</span></code><span><span class="hljs-keyword">from</span><span> openai </span><span class="hljs-keyword">import</span><span> OpenAI
+</span></span><span> 
+</span><span>client = OpenAI()
+</span><span> 
+</span><span>assistant = client.beta.assistants.create(
+</span><span><span>  name=</span><span class="hljs-string">"Financial Analyst Assistant"</span><span>,
+</span></span><span><span>  instructions=</span><span class="hljs-string">"You are an expert financial analyst. Use you knowledge base to answer questions about audited financial statements."</span><span>,
+</span></span><span><span>  model=</span><span class="hljs-string">"gpt-4o"</span><span>,
+</span></span><span><span>  tools=[{</span><span class="hljs-string">"type"</span><span>: </span><span class="hljs-string">"file_search"</span><span>}],
+</span></span><span>)</span></code></pre></div></div>
+<p>Once the <code>file_search</code> tool is enabled, the model decides when to retrieve content based on user messages.</p>
+<div class="anchor-heading-wrapper"><h3 id="step-2-upload-files-and-add-them-to-a-vector-store" class="anchor-heading" data-name="step-2-upload-files-and-add-them-to-a-vector-store">Step 2: Upload files and add them to a Vector Store<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h3></div>
+<p>To access your files, the <code>file_search</code> tool uses the Vector Store object.
+Upload your files and create a Vector Store to contain them.
+Once the Vector Store is created, you should poll its status until all files are out of the <code>in_progress</code> state to
+ensure that all content has finished processing. The SDK provides helpers to uploading and polling in one shot.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span><span class="react-syntax-highlighter-line-number">5
+</span><span class="react-syntax-highlighter-line-number">6
+</span><span class="react-syntax-highlighter-line-number">7
+</span><span class="react-syntax-highlighter-line-number">8
+</span><span class="react-syntax-highlighter-line-number">9
+</span><span class="react-syntax-highlighter-line-number">10
+</span><span class="react-syntax-highlighter-line-number">11
+</span><span class="react-syntax-highlighter-line-number">12
+</span><span class="react-syntax-highlighter-line-number">13
+</span><span class="react-syntax-highlighter-line-number">14
+</span><span class="react-syntax-highlighter-line-number">15
+</span><span class="react-syntax-highlighter-line-number">16
+</span></code><span><span class="hljs-comment"># Create a vector store caled "Financial Statements"</span><span>
+</span></span><span><span>vector_store = client.beta.vector_stores.create(name=</span><span class="hljs-string">"Financial Statements"</span><span>)
+</span></span><span> 
+</span><span><span></span><span class="hljs-comment"># Ready the files for upload to OpenAI</span><span>
+</span></span><span><span>file_paths = [</span><span class="hljs-string">"edgar/goog-10k.pdf"</span><span>, </span><span class="hljs-string">"edgar/brka-10k.txt"</span><span>]
+</span></span><span><span>file_streams = [</span><span class="hljs-built_in">open</span><span>(path, </span><span class="hljs-string">"rb"</span><span>) </span><span class="hljs-keyword">for</span><span> path </span><span class="hljs-keyword">in</span><span> file_paths]
+</span></span><span> 
+</span><span><span></span><span class="hljs-comment"># Use the upload and poll SDK helper to upload the files, add them to the vector store,</span><span>
+</span></span><span><span></span><span class="hljs-comment"># and poll the status of the file batch for completion.</span><span>
+</span></span><span>file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
+</span><span><span>  vector_store_id=vector_store.</span><span class="hljs-built_in">id</span><span>, files=file_streams
+</span></span><span>)
+</span><span> 
+</span><span><span></span><span class="hljs-comment"># You can print the status and the file counts of the batch to see the result of this operation.</span><span>
+</span></span><span><span></span><span class="hljs-built_in">print</span><span>(file_batch.status)
+</span></span><span><span></span><span class="hljs-built_in">print</span><span>(file_batch.file_counts)</span></span></code></pre></div></div>
+<div class="anchor-heading-wrapper"><h3 id="step-3-update-the-assistant-to-use-the-new-vector-store" class="anchor-heading" data-name="step-3-update-the-assistant-to-use-the-new-vector-store">Step 3: Update the assistant to use the new Vector Store<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h3></div>
+<p>To make the files accessible to your assistant, update the assistant’s <code>tool_resources</code> with the new <code>vector_store</code> id.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span></code><span><span>assistant = client.beta.assistants.update(
+</span></span><span><span>  assistant_id=assistant.</span><span class="hljs-built_in">id</span><span>,
+</span></span><span><span>  tool_resources={</span><span class="hljs-string">"file_search"</span><span>: {</span><span class="hljs-string">"vector_store_ids"</span><span>: [vector_store.</span><span class="hljs-built_in">id</span><span>]}},
+</span></span><span>)</span></code></pre></div></div>
+<div class="anchor-heading-wrapper"><h3 id="step-4-create-a-thread" class="anchor-heading" data-name="step-4-create-a-thread">Step 4: Create a thread<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h3></div>
+<p>You can also attach files as Message attachments on your thread. Doing so will create another <code>vector_store</code> associated with the thread, or, if there is already a vector store attached to this thread, attach the new files to the existing thread vector store. When you create a Run on this thread, the file search tool will query both the <code>vector_store</code> from your assistant and the <code>vector_store</code> on the thread.</p>
+<p>In this example, the user attached a copy of Apple’s latest 10-K filing.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span><span class="react-syntax-highlighter-line-number">5
+</span><span class="react-syntax-highlighter-line-number">6
+</span><span class="react-syntax-highlighter-line-number">7
+</span><span class="react-syntax-highlighter-line-number">8
+</span><span class="react-syntax-highlighter-line-number">9
+</span><span class="react-syntax-highlighter-line-number">10
+</span><span class="react-syntax-highlighter-line-number">11
+</span><span class="react-syntax-highlighter-line-number">12
+</span><span class="react-syntax-highlighter-line-number">13
+</span><span class="react-syntax-highlighter-line-number">14
+</span><span class="react-syntax-highlighter-line-number">15
+</span><span class="react-syntax-highlighter-line-number">16
+</span><span class="react-syntax-highlighter-line-number">17
+</span><span class="react-syntax-highlighter-line-number">18
+</span><span class="react-syntax-highlighter-line-number">19
+</span><span class="react-syntax-highlighter-line-number">20
+</span><span class="react-syntax-highlighter-line-number">21
+</span></code><span><span class="hljs-comment"># Upload the user provided file to OpenAI</span><span>
+</span></span><span>message_file = client.files.create(
+</span><span><span>  file=</span><span class="hljs-built_in">open</span><span>(</span><span class="hljs-string">"edgar/aapl-10k.pdf"</span><span>, </span><span class="hljs-string">"rb"</span><span>), purpose=</span><span class="hljs-string">"assistants"</span><span>
+</span></span><span>)
+</span><span> 
+</span><span><span></span><span class="hljs-comment"># Create a thread and attach the file to the message</span><span>
+</span></span><span>thread = client.beta.threads.create(
+</span><span>  messages=[
+</span><span>    {
+</span><span><span>      </span><span class="hljs-string">"role"</span><span>: </span><span class="hljs-string">"user"</span><span>,
+</span></span><span><span>      </span><span class="hljs-string">"content"</span><span>: </span><span class="hljs-string">"How many shares of AAPL were outstanding at the end of of October 2023?"</span><span>,
+</span></span><span><span>      </span><span class="hljs-comment"># Attach the new file to the message.</span><span>
+</span></span><span><span>      </span><span class="hljs-string">"attachments"</span><span>: [
+</span></span><span><span>        { </span><span class="hljs-string">"file_id"</span><span>: message_file.</span><span class="hljs-built_in">id</span><span>, </span><span class="hljs-string">"tools"</span><span>: [{</span><span class="hljs-string">"type"</span><span>: </span><span class="hljs-string">"file_search"</span><span>}] }
+</span></span><span>      ],
+</span><span>    }
+</span><span>  ]
+</span><span>)
+</span><span> 
+</span><span><span></span><span class="hljs-comment"># The thread now has a vector store with that file in its tool resources.</span><span>
+</span></span><span><span></span><span class="hljs-built_in">print</span><span>(thread.tool_resources.file_search)</span></span></code></pre></div></div>
+<p>Vector stores created using message attachments have a default expiration policy of 7 days after they were last active (defined as the last time the vector store was part of a run). This default exists to help you manage your vector storage costs. You can override these expiration policies at any time. Learn more <a href="https://platform.openai.com/docs/assistants/tools/file-search#managing-costs-with-expiration-policies">here</a>.</p>
+<div class="anchor-heading-wrapper"><h3 id="step-5-create-a-run-and-check-the-output" class="anchor-heading" data-name="step-5-create-a-run-and-check-the-output">Step 5: Create a run and check the output<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h3></div>
+<p>Now, create a Run and observe that the model uses the File Search tool to provide a response to the user’s question.</p>
+<div><div class="content-switcher"><div class="css-6nk2w4 e1ubs4xu0"><div class="css-1sjpea0 e1ubs4xu1"><button type="button" tabindex="0" class="btn btn-sm btn-filled btn-primary" aria-pressed="true"><span class="btn-label-wrap"><span class="btn-label-inner">With streaming</span></span></button><button type="button" tabindex="0" class="btn btn-sm btn-outlined btn-primary" aria-pressed="false"><span class="btn-label-wrap"><span class="btn-label-inner">Without streaming</span></span></button></div></div></div><div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span><span class="react-syntax-highlighter-line-number">5
+</span><span class="react-syntax-highlighter-line-number">6
+</span><span class="react-syntax-highlighter-line-number">7
+</span><span class="react-syntax-highlighter-line-number">8
+</span><span class="react-syntax-highlighter-line-number">9
+</span><span class="react-syntax-highlighter-line-number">10
+</span><span class="react-syntax-highlighter-line-number">11
+</span><span class="react-syntax-highlighter-line-number">12
+</span><span class="react-syntax-highlighter-line-number">13
+</span><span class="react-syntax-highlighter-line-number">14
+</span><span class="react-syntax-highlighter-line-number">15
+</span><span class="react-syntax-highlighter-line-number">16
+</span><span class="react-syntax-highlighter-line-number">17
+</span><span class="react-syntax-highlighter-line-number">18
+</span><span class="react-syntax-highlighter-line-number">19
+</span><span class="react-syntax-highlighter-line-number">20
+</span><span class="react-syntax-highlighter-line-number">21
+</span><span class="react-syntax-highlighter-line-number">22
+</span><span class="react-syntax-highlighter-line-number">23
+</span><span class="react-syntax-highlighter-line-number">24
+</span><span class="react-syntax-highlighter-line-number">25
+</span><span class="react-syntax-highlighter-line-number">26
+</span><span class="react-syntax-highlighter-line-number">27
+</span><span class="react-syntax-highlighter-line-number">28
+</span><span class="react-syntax-highlighter-line-number">29
+</span><span class="react-syntax-highlighter-line-number">30
+</span><span class="react-syntax-highlighter-line-number">31
+</span><span class="react-syntax-highlighter-line-number">32
+</span><span class="react-syntax-highlighter-line-number">33
+</span><span class="react-syntax-highlighter-line-number">34
+</span><span class="react-syntax-highlighter-line-number">35
+</span><span class="react-syntax-highlighter-line-number">36
+</span><span class="react-syntax-highlighter-line-number">37
+</span><span class="react-syntax-highlighter-line-number">38
+</span><span class="react-syntax-highlighter-line-number">39
+</span><span class="react-syntax-highlighter-line-number">40
+</span><span class="react-syntax-highlighter-line-number">41
+</span><span class="react-syntax-highlighter-line-number">42
+</span><span class="react-syntax-highlighter-line-number">43
+</span></code><span><span class="hljs-keyword">from</span><span> typing_extensions </span><span class="hljs-keyword">import</span><span> override
+</span></span><span><span></span><span class="hljs-keyword">from</span><span> openai </span><span class="hljs-keyword">import</span><span> AssistantEventHandler, OpenAI
+</span></span><span> 
+</span><span>client = OpenAI()
+</span><span> 
+</span><span><span></span><span class="hljs-class hljs-keyword">class</span><span class="hljs-class"> </span><span class="hljs-class hljs-title">EventHandler</span><span class="hljs-class">(</span><span class="hljs-class hljs-params">AssistantEventHandler</span><span class="hljs-class">):</span><span>
+</span></span><span><span></span><span class="hljs-meta">    @override</span><span>
+</span></span><span><span>    </span><span class="hljs-function hljs-keyword">def</span><span class="hljs-function"> </span><span class="hljs-function hljs-title">on_text_created</span><span class="hljs-function">(</span><span class="hljs-function hljs-params">self, text</span><span class="hljs-function">) -&gt; </span><span class="hljs-function hljs-literal">None</span><span class="hljs-function">:</span><span>
+</span></span><span><span>        </span><span class="hljs-built_in">print</span><span>(</span><span class="hljs-string">f"\nassistant &gt; "</span><span>, end=</span><span class="hljs-string">""</span><span>, flush=</span><span class="hljs-literal">True</span><span>)
+</span></span><span>
+</span><span><span></span><span class="hljs-meta">    @override</span><span>
+</span></span><span><span>    </span><span class="hljs-function hljs-keyword">def</span><span class="hljs-function"> </span><span class="hljs-function hljs-title">on_tool_call_created</span><span class="hljs-function">(</span><span class="hljs-function hljs-params">self, tool_call</span><span class="hljs-function">):</span><span>
+</span></span><span><span>        </span><span class="hljs-built_in">print</span><span>(</span><span class="hljs-string">f"\nassistant &gt; </span><span class="hljs-string hljs-subst">{tool_call.</span><span class="hljs-string hljs-subst hljs-built_in">type</span><span class="hljs-string hljs-subst">}</span><span class="hljs-string">\n"</span><span>, flush=</span><span class="hljs-literal">True</span><span>)
+</span></span><span>
+</span><span><span></span><span class="hljs-meta">    @override</span><span>
+</span></span><span><span>    </span><span class="hljs-function hljs-keyword">def</span><span class="hljs-function"> </span><span class="hljs-function hljs-title">on_message_done</span><span class="hljs-function">(</span><span class="hljs-function hljs-params">self, message</span><span class="hljs-function">) -&gt; </span><span class="hljs-function hljs-literal">None</span><span class="hljs-function">:</span><span>
+</span></span><span><span>        </span><span class="hljs-comment"># print a citation to the file searched</span><span>
+</span></span><span><span>        message_content = message.content[</span><span class="hljs-number">0</span><span>].text
+</span></span><span>        annotations = message_content.annotations
+</span><span>        citations = []
+</span><span><span>        </span><span class="hljs-keyword">for</span><span> index, annotation </span><span class="hljs-keyword">in</span><span> </span><span class="hljs-built_in">enumerate</span><span>(annotations):
+</span></span><span>            message_content.value = message_content.value.replace(
+</span><span><span>                annotation.text, </span><span class="hljs-string">f"[</span><span class="hljs-string hljs-subst">{index}</span><span class="hljs-string">]"</span><span>
+</span></span><span>            )
+</span><span><span>            </span><span class="hljs-keyword">if</span><span> file_citation := </span><span class="hljs-built_in">getattr</span><span>(annotation, </span><span class="hljs-string">"file_citation"</span><span>, </span><span class="hljs-literal">None</span><span>):
+</span></span><span>                cited_file = client.files.retrieve(file_citation.file_id)
+</span><span><span>                citations.append(</span><span class="hljs-string">f"[</span><span class="hljs-string hljs-subst">{index}</span><span class="hljs-string">] </span><span class="hljs-string hljs-subst">{cited_file.filename}</span><span class="hljs-string">"</span><span>)
+</span></span><span>
+</span><span><span>        </span><span class="hljs-built_in">print</span><span>(message_content.value)
+</span></span><span><span>        </span><span class="hljs-built_in">print</span><span>(</span><span class="hljs-string">"\n"</span><span>.join(citations))
+</span></span><span>
+</span><span>
+</span><span><span></span><span class="hljs-comment"># Then, we use the stream SDK helper</span><span>
+</span></span><span><span></span><span class="hljs-comment"># with the EventHandler class to create the Run</span><span>
+</span></span><span><span></span><span class="hljs-comment"># and stream the response.</span><span>
+</span></span><span>
+</span><span><span></span><span class="hljs-keyword">with</span><span> client.beta.threads.runs.stream(
+</span></span><span><span>    thread_id=thread.</span><span class="hljs-built_in">id</span><span>,
+</span></span><span><span>    assistant_id=assistant.</span><span class="hljs-built_in">id</span><span>,
+</span></span><span><span>    instructions=</span><span class="hljs-string">"Please address the user as Jane Doe. The user has a premium account."</span><span>,
+</span></span><span>    event_handler=EventHandler(),
+</span><span><span>) </span><span class="hljs-keyword">as</span><span> stream:
+</span></span><span>    stream.until_done()</span></code></pre></div></div></div>
+<p>Your new assistant will query both attached vector stores (one containing <code>goog-10k.pdf</code> and <code>brka-10k.txt</code>, and the other containing <code>aapl-10k.pdf</code>) and return this result from <code>aapl-10k.pdf</code>.</p>
+<p>To retrieve the contents of the file search results that were used by the model, use the <code>include</code> query parameter and provide a value of <code>step_details.tool_calls[*].file_search.results[*].content</code> in the format <code>?include[]=step_details.tool_calls[*].file_search.results[*].content</code>.</p>
+<hr>
+<div class="anchor-heading-wrapper"><h2 id="how-it-works" class="anchor-heading" data-name="how-it-works">How it works<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h2></div>
+<p>The <code>file_search</code> tool implements several retrieval best practices out of the box to help you extract the right data from your files and augment the model’s responses. The <code>file_search</code> tool:</p>
+<ul>
+<li>Rewrites user queries to optimize them for search.</li>
+<li>Breaks down complex user queries into multiple searches it can run in parallel.</li>
+<li>Runs both keyword and semantic searches across both assistant and thread vector stores.</li>
+<li>Reranks search results to pick the most relevant ones before generating the final response.</li>
+</ul>
+<p>By default, the <code>file_search</code> tool uses the following settings but these can be <a href="https://platform.openai.com/docs/assistants/tools/file-search#customizing-file-search-settings">configured</a> to suit your needs:</p>
+<ul>
+<li>Chunk size: 800 tokens</li>
+<li>Chunk overlap: 400 tokens</li>
+<li>Embedding model: <code>text-embedding-3-large</code> at 256 dimensions</li>
+<li>Maximum number of chunks added to context: 20 (could be fewer)</li>
+<li>Ranker: <code>auto</code> (OpenAI will choose which ranker to use)</li>
+<li>Score threshold: 0 minimum ranking score</li>
+</ul>
+<p><strong>Known Limitations</strong></p>
+<p>We have a few known limitations we're working on adding support for in the coming months:</p>
+<ol>
+<li>Support for deterministic pre-search filtering using custom metadata.</li>
+<li>Support for parsing images within documents (including images of charts, graphs, tables etc.)</li>
+<li>Support for retrievals over structured file formats (like <code>csv</code> or <code>jsonl</code>).</li>
+<li>Better support for summarization —&nbsp;the tool today is optimized for search queries.</li>
+</ol>
+<div class="anchor-heading-wrapper"><h2 id="vector-stores" class="anchor-heading" data-name="vector-stores">Vector stores<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h2></div>
+<p>Vector Store objects give the File Search tool the ability to search your files. Adding a file to a <code>vector_store</code> automatically parses, chunks, embeds and stores the file in a vector database that's capable of both keyword and semantic search. Each <code>vector_store</code> can hold up to 10,000 files. Vector stores can be attached to both Assistants and Threads. Today, you can attach at most one vector store to an assistant and at most one vector store to a thread.</p>
+<div class="anchor-heading-wrapper"><h4 id="creating-vector-stores-and-adding-files" class="anchor-heading" data-name="creating-vector-stores-and-adding-files">Creating vector stores and adding files<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h4></div>
+<p>You can create a vector store and add files to it in a single API call:</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span></code><span><span>vector_store = client.beta.vector_stores.create(
+</span></span><span><span>  name=</span><span class="hljs-string">"Product Documentation"</span><span>,
+</span></span><span><span>  file_ids=[</span><span class="hljs-string">'file_1'</span><span>, </span><span class="hljs-string">'file_2'</span><span>, </span><span class="hljs-string">'file_3'</span><span>, </span><span class="hljs-string">'file_4'</span><span>, </span><span class="hljs-string">'file_5'</span><span>]
+</span></span><span>)</span></code></pre></div></div>
+<p>Adding files to vector stores is an async operation. To ensure the operation is complete, we recommend that you use the 'create and poll' helpers in our official SDKs. If you're not using the SDKs, you can retrieve the <code>vector_store</code> object and monitor it's <a href="https://platform.openai.com/docs/api-reference/vector-stores/object#vector-stores/object-file_counts"><code>file_counts</code></a> property to see the result of the file ingestion operation.</p>
+<p>Files can also be added to a vector store after it's created by <a href="https://platform.openai.com/docs/api-reference/vector-stores/createFile">creating vector store files</a>.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span></code><span><span>file = client.beta.vector_stores.files.create_and_poll(
+</span></span><span><span>  vector_store_id=</span><span class="hljs-string">"vs_abc123"</span><span>,
+</span></span><span><span>  file_id=</span><span class="hljs-string">"file-abc123"</span><span>
+</span></span><span>)</span></code></pre></div></div>
+<p>Alternatively, you can add several files to a vector store by <a href="https://platform.openai.com/docs/api-reference/vector-stores/createBatch">creating batches</a> of up to 500 files.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span></code><span><span>batch = client.beta.vector_stores.file_batches.create_and_poll(
+</span></span><span><span>  vector_store_id=</span><span class="hljs-string">"vs_abc123"</span><span>,
+</span></span><span><span>  file_ids=[</span><span class="hljs-string">'file_1'</span><span>, </span><span class="hljs-string">'file_2'</span><span>, </span><span class="hljs-string">'file_3'</span><span>, </span><span class="hljs-string">'file_4'</span><span>, </span><span class="hljs-string">'file_5'</span><span>]
+</span></span><span>)</span></code></pre></div></div>
+<p>Similarly, these files can be removed from a vector store by either:</p>
+<ul>
+<li>Deleting the <a href="https://platform.openai.com/docs/api-reference/vector-stores/deleteFile">vector store file object</a> or,</li>
+<li>By deleting the underlying <a href="https://platform.openai.com/docs/api-reference/files/delete">file object</a> (which removes the file it from all <code>vector_store</code> and <code>code_interpreter</code> configurations across all assistants and threads in your organization)</li>
+</ul>
+<p>The maximum file size is 512 MB. Each file should contain no more than 5,000,000 tokens per file (computed automatically when you attach a file).</p>
+<p>File Search supports a variety of file formats including <code>.pdf</code>, <code>.md</code>, and <code>.docx</code>. More details on the file extensions (and their corresponding MIME-types) supported can be found in the <a href="https://platform.openai.com/docs/assistants/tools/file-search#supported-files">Supported files</a> section below.</p>
+<div class="anchor-heading-wrapper"><h4 id="attaching-vector-stores" class="anchor-heading" data-name="attaching-vector-stores">Attaching vector stores<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h4></div>
+<p>You can attach vector stores to your Assistant or Thread using the <code>tool_resources</code> parameter.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span><span class="react-syntax-highlighter-line-number">5
+</span><span class="react-syntax-highlighter-line-number">6
+</span><span class="react-syntax-highlighter-line-number">7
+</span><span class="react-syntax-highlighter-line-number">8
+</span><span class="react-syntax-highlighter-line-number">9
+</span><span class="react-syntax-highlighter-line-number">10
+</span><span class="react-syntax-highlighter-line-number">11
+</span><span class="react-syntax-highlighter-line-number">12
+</span><span class="react-syntax-highlighter-line-number">13
+</span><span class="react-syntax-highlighter-line-number">14
+</span><span class="react-syntax-highlighter-line-number">15
+</span><span class="react-syntax-highlighter-line-number">16
+</span><span class="react-syntax-highlighter-line-number">17
+</span><span class="react-syntax-highlighter-line-number">18
+</span><span class="react-syntax-highlighter-line-number">19
+</span></code><span><span>assistant = client.beta.assistants.create(
+</span></span><span><span>  instructions=</span><span class="hljs-string">"You are a helpful product support assistant and you answer questions based on the files provided to you."</span><span>,
+</span></span><span><span>  model=</span><span class="hljs-string">"gpt-4o"</span><span>,
+</span></span><span><span>  tools=[{</span><span class="hljs-string">"type"</span><span>: </span><span class="hljs-string">"file_search"</span><span>}],
+</span></span><span>  tool_resources={
+</span><span><span>    </span><span class="hljs-string">"file_search"</span><span>: {
+</span></span><span><span>      </span><span class="hljs-string">"vector_store_ids"</span><span>: [</span><span class="hljs-string">"vs_1"</span><span>]
+</span></span><span>    }
+</span><span>  }
+</span><span>)
+</span><span>
+</span><span>thread = client.beta.threads.create(
+</span><span><span>  messages=[ { </span><span class="hljs-string">"role"</span><span>: </span><span class="hljs-string">"user"</span><span>, </span><span class="hljs-string">"content"</span><span>: </span><span class="hljs-string">"How do I cancel my subscription?"</span><span>} ],
+</span></span><span>  tool_resources={
+</span><span><span>    </span><span class="hljs-string">"file_search"</span><span>: {
+</span></span><span><span>      </span><span class="hljs-string">"vector_store_ids"</span><span>: [</span><span class="hljs-string">"vs_2"</span><span>]
+</span></span><span>    }
+</span><span>  }
+</span><span>)</span></code></pre></div></div>
+<p>You can also attach a vector store to Threads or Assistants after they're created by updating them with the right <code>tool_resources</code>.</p>
+<div class="anchor-heading-wrapper"><h4 id="ensuring-vector-store-readiness-before-creating-runs" class="anchor-heading" data-name="ensuring-vector-store-readiness-before-creating-runs">Ensuring vector store readiness before creating runs<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h4></div>
+<p>We highly recommend that you ensure all files in a <code>vector_store</code> are fully processed before you create a run. This will ensure that all the data in your <code>vector_store</code> is searchable. You can check for <code>vector_store</code> readiness by using the polling helpers in our SDKs, or by manually polling the <code>vector_store</code> object to ensure the <a href="https://platform.openai.com/docs/api-reference/vector-stores/object#vector-stores/object-status"><code>status</code></a> is <code>completed</code>.</p>
+<p>As a fallback, we've built a <strong>60 second maximum wait</strong> in the Run object when the <strong>thread’s</strong>&nbsp;vector store contains files that are still being processed. This is to ensure that any files your users upload in a thread a fully searchable before the run proceeds. This fallback wait <em>does not</em> apply to the assistant's vector store.</p>
+<div class="anchor-heading-wrapper"><h4 id="customizing-file-search-settings" class="anchor-heading" data-name="customizing-file-search-settings">Customizing File Search settings<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h4></div>
+<p>You can customize how the <code>file_search</code> tool chunks your data and how many chunks it returns to the model context.</p>
+<p><strong>Chunking configuration</strong></p>
+<p>By default, <code>max_chunk_size_tokens</code> is set to <code>800</code> and <code>chunk_overlap_tokens</code> is set to <code>400</code>, meaning every file is indexed by being split up into 800-token chunks, with 400-token overlap between consecutive chunks.</p>
+<p>You can adjust this by setting <a href="https://platform.openai.com/docs/api-reference/vector-stores-files/createFile#vector-stores-files-createfile-chunking_strategy"><code>chunking_strategy</code></a> when adding files to the vector store. There are certain limitations to <code>chunking_strategy</code>:</p>
+<ul>
+<li><code>max_chunk_size_tokens</code> must be between 100 and 4096 inclusive.</li>
+<li><code>chunk_overlap_tokens</code> must be non-negative and should not exceed <code>max_chunk_size_tokens / 2</code>.</li>
+</ul>
+<p><strong>Number of chunks</strong></p>
+<p>By default, the <code>file_search</code> tool outputs up to 20 chunks for <code>gpt-4*</code> models and up to 5 chunks for <code>gpt-3.5-turbo</code>. You can adjust this by setting <a href="https://platform.openai.com/docs/api-reference/assistants/createAssistant#assistants-createassistant-tools"><code>file_search.max_num_results</code></a> in the tool when creating the assistant or the run.</p>
+<p>Note that the <code>file_search</code> tool may output fewer than this number for a myriad of reasons:</p>
+<ul>
+<li>The total number of chunks is fewer than <code>max_num_results</code>.</li>
+<li>The total token size of all the retrieved chunks exceeds the token "budget" assigned to the <code>file_search</code> tool. The <code>file_search</code> tool currently has a token bugdet of:
+<ul>
+<li>4,000 tokens for <code>gpt-3.5-turbo</code></li>
+<li>16,000 tokens for <code>gpt-4*</code> models</li>
+</ul>
+</li>
+</ul>
+<div class="anchor-heading-wrapper"><h4 id="improve-file-search-result-relevance-with-chunk-ranking" class="anchor-heading" data-name="improve-file-search-result-relevance-with-chunk-ranking">Improve file search result relevance with chunk ranking<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h4></div>
+<p>By default, the file search tool will return all search results to the model that it thinks have any level of relevance when generating a response. However, if responses are generated using content that has low relevance, it can lead to lower quality responses. You can adjust this behavior by both inspecting the file search results that are returned when generating responses, and then tuning the behavior of the file search tool's ranker to change how relevant results must be before they are used to generate a response.</p>
+<p><strong>Inspecting file search chunks</strong></p>
+<p>The first step in improving the quality of your file search results is inspecting the current behavior of your assistant. Most often, this will involve investigating responses from your assistant that are not not performing well. You can get <a href="https://platform.openai.com/docs/api-reference/run-steps/getRunStep">granular information about a past run step</a> using the REST API, specifically using the <code>include</code> query parameter to get the file chunks that are being used to generate results.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small">Include file search results in response when creating a run</div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option><option value="curl">curl</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span><span class="react-syntax-highlighter-line-number">5
+</span><span class="react-syntax-highlighter-line-number">6
+</span><span class="react-syntax-highlighter-line-number">7
+</span><span class="react-syntax-highlighter-line-number">8
+</span><span class="react-syntax-highlighter-line-number">9
+</span><span class="react-syntax-highlighter-line-number">10
+</span><span class="react-syntax-highlighter-line-number">11
+</span></code><span><span class="hljs-keyword">from</span><span> openai </span><span class="hljs-keyword">import</span><span> OpenAI
+</span></span><span>client = OpenAI()
+</span><span>
+</span><span>run_step = client.beta.threads.runs.steps.retrieve(
+</span><span><span>    thread_id=</span><span class="hljs-string">"thread_abc123"</span><span>,
+</span></span><span><span>    run_id=</span><span class="hljs-string">"run_abc123"</span><span>,
+</span></span><span><span>    step_id=</span><span class="hljs-string">"step_abc123"</span><span>,
+</span></span><span><span>    include=[</span><span class="hljs-string">"step_details.tool_calls[*].file_search.results[*].content"</span><span>]
+</span></span><span>)
+</span><span>
+</span><span><span></span><span class="hljs-built_in">print</span><span>(run_step)</span></span></code></pre></div></div>
+<p>You can then log and inspect the search results used during the run step, and determine whether or not they are consistently relevant to the responses your assistant should generate.</p>
+<p><strong>Configure ranking options</strong></p>
+<p>If you have determined that your file search results are not sufficiently relevant to generate high quality responses, you can adjust the settings of the result ranker used to choose which search results should be used to generate responses. You can adjust this setting <a href="https://platform.openai.com/docs/api-reference/assistants/createAssistant#assistants-createassistant-tools"><code>file_search.ranking_options</code></a> in the tool when <strong>creating the assistant</strong> or <strong>creating the run</strong>.</p>
+<p>The settings you can configure are:</p>
+<ul>
+<li><code>ranker</code> - Which ranker to use in determining which chunks to use. The available values are <code>auto</code>, which uses the latest available ranker, and <code>default_2024_08_21</code>.</li>
+<li><code>score_threshold</code> - a ranking between 0.0 and 1.0, with 1.0 being the highest ranking. A higher number will constrain the file chunks used to generate a result to only chunks with a higher possible relevance, at the cost of potentially leaving out relevant chunks.</li>
+</ul>
+<div class="anchor-heading-wrapper"><h4 id="managing-costs-with-expiration-policies" class="anchor-heading" data-name="managing-costs-with-expiration-policies">Managing costs with expiration policies<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h4></div>
+<p>The <code>file_search</code> tool uses the <code>vector_stores</code> object as its resource and you will be billed based on the <a href="https://platform.openai.com/docs/api-reference/vector-stores/object#vector-stores/object-bytes">size</a> of the <code>vector_store</code> objects created. The size of the vector store object is the sum of all the parsed chunks from your files and their corresponding embeddings.</p>
+<p>You first GB is free and beyond that, usage is billed at $0.10/GB/day of vector storage. There are no other costs associated with vector store operations.</p>
+<p>In order to help you manage the costs associated with these <code>vector_store</code> objects, we have added support for expiration policies in the <code>vector_store</code> object. You can set these policies when creating or updating the <code>vector_store</code> object.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span><span class="react-syntax-highlighter-line-number">5
+</span><span class="react-syntax-highlighter-line-number">6
+</span><span class="react-syntax-highlighter-line-number">7
+</span><span class="react-syntax-highlighter-line-number">8
+</span></code><span><span>vector_store = client.beta.vector_stores.create_and_poll(
+</span></span><span><span>  name=</span><span class="hljs-string">"Product Documentation"</span><span>,
+</span></span><span><span>  file_ids=[</span><span class="hljs-string">'file_1'</span><span>, </span><span class="hljs-string">'file_2'</span><span>, </span><span class="hljs-string">'file_3'</span><span>, </span><span class="hljs-string">'file_4'</span><span>, </span><span class="hljs-string">'file_5'</span><span>],
+</span></span><span>  expires_after={
+</span><span><span>	  </span><span class="hljs-string">"anchor"</span><span>: </span><span class="hljs-string">"last_active_at"</span><span>,
+</span></span><span><span>	  </span><span class="hljs-string">"days"</span><span>: </span><span class="hljs-number">7</span><span>
+</span></span><span>  }
+</span><span>)</span></code></pre></div></div>
+<p><strong>Thread vector stores have default expiration policies</strong></p>
+<p>Vector stores created using thread helpers (like <a href="https://platform.openai.com/docs/api-reference/threads/createThread#threads-createthread-tool_resources"><code>tool_resources.file_search.vector_stores</code></a> in Threads or <a href="https://platform.openai.com/docs/api-reference/messages/createMessage#messages-createmessage-attachments">message.attachments</a> in Messages) have a default expiration policy of 7 days after they were last active (defined as the last time the vector store was part of a run).</p>
+<p>When a vector store expires, runs on that thread will fail. To fix this, you can simply recreate a new <code>vector_store</code> with the same files and reattach it to the thread.</p>
+<div class="code-sample light-mode"><div class="code-sample-header"><div class="code-sample-title body-small"></div><div class="code-sample-select-wrap"><div class="code-sample-select-val">python</div><select class="code-sample-select api-code-lang-select"><option disabled="" value="">Select library</option><option value="python">python</option><option value="node.js">node.js</option></select><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.293 8.293a1 1 0 0 1 1.414 0L12 14.586l6.293-6.293a1 1 0 1 1 1.414 1.414l-7 7a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414Z" clip-rule="evenodd"></path></svg></div><div class="code-sample-copy"><button type="button" tabindex="0" class="btn btn-xsm btn-minimal btn-neutral"><span class="btn-label-wrap"><span class="btn-node start-node"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24" class="animate-in"><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2V5Zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v2ZM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5Z" clip-rule="evenodd"></path></svg></span></span></button></div></div><div class="code-sample-body code-sample-body-small code-sample-body-with-header"><pre class="hljs syntax-highlighter light-mode code-sample-pre"><code class="language-python" style="white-space: pre;"><code style="float: left; padding-right: 10px;"><span class="react-syntax-highlighter-line-number">1
+</span><span class="react-syntax-highlighter-line-number">2
+</span><span class="react-syntax-highlighter-line-number">3
+</span><span class="react-syntax-highlighter-line-number">4
+</span><span class="react-syntax-highlighter-line-number">5
+</span><span class="react-syntax-highlighter-line-number">6
+</span><span class="react-syntax-highlighter-line-number">7
+</span><span class="react-syntax-highlighter-line-number">8
+</span><span class="react-syntax-highlighter-line-number">9
+</span><span class="react-syntax-highlighter-line-number">10
+</span><span class="react-syntax-highlighter-line-number">11
+</span><span class="react-syntax-highlighter-line-number">12
+</span></code><span><span>all_files = </span><span class="hljs-built_in">list</span><span>(client.beta.vector_stores.files.</span><span class="hljs-built_in">list</span><span>(</span><span class="hljs-string">"vs_expired"</span><span>))
+</span></span><span>
+</span><span><span>vector_store = client.beta.vector_stores.create(name=</span><span class="hljs-string">"rag-store"</span><span>)
+</span></span><span>client.beta.threads.update(
+</span><span><span>    </span><span class="hljs-string">"thread_abc123"</span><span>,
+</span></span><span><span>    tool_resources={</span><span class="hljs-string">"file_search"</span><span>: {</span><span class="hljs-string">"vector_store_ids"</span><span>: [vector_store.</span><span class="hljs-built_in">id</span><span>]}},
+</span></span><span>)
+</span><span>
+</span><span><span></span><span class="hljs-keyword">for</span><span> file_batch </span><span class="hljs-keyword">in</span><span> chunked(all_files, </span><span class="hljs-number">100</span><span>):
+</span></span><span>    client.beta.vector_stores.file_batches.create_and_poll(
+</span><span><span>        vector_store_id=vector_store.</span><span class="hljs-built_in">id</span><span>, file_ids=[file.</span><span class="hljs-built_in">id</span><span> </span><span class="hljs-keyword">for</span><span> file </span><span class="hljs-keyword">in</span><span> file_batch]
+</span></span><span>    )</span></code></pre></div></div>
+<div class="anchor-heading-wrapper"><h2 id="supported-files" class="anchor-heading" data-name="supported-files">Supported files<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24" class="anchor-heading-icon" role="presentation"><path fill-rule="evenodd" d="M18.293 5.707a4.657 4.657 0 0 0-6.586 0l-1 1a1 1 0 1 1-1.414-1.414l1-1a6.657 6.657 0 1 1 9.414 9.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a4.657 4.657 0 0 0 0-6.586Zm-2.586 2.586a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 0Zm-9 1a1 1 0 0 1 0 1.414l-1 1a4.657 4.657 0 0 0 6.586 6.586l1-1a1 1 0 0 1 1.414 1.414l-1 1a6.657 6.657 0 1 1-9.414-9.414l1-1a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path></svg></h2></div>
+<p><em>For <code>text/</code> MIME types, the encoding must be one of <code>utf-8</code>, <code>utf-16</code>, or <code>ascii</code>.</em></p>
+
+<table><thead><tr><th>File format</th><th>MIME type</th></tr></thead><tbody><tr><td><code>.c</code></td><td><code>text/x-c</code></td></tr><tr><td><code>.cpp</code></td><td><code>text/x-c++</code></td></tr><tr><td><code>.cs</code></td><td><code>text/x-csharp</code></td></tr><tr><td><code>.css</code></td><td><code>text/css</code></td></tr><tr><td><code>.doc</code></td><td><code>application/msword</code></td></tr><tr><td><code>.docx</code></td><td><code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code></td></tr><tr><td><code>.go</code></td><td><code>text/x-golang</code></td></tr><tr><td><code>.html</code></td><td><code>text/html</code></td></tr><tr><td><code>.java</code></td><td><code>text/x-java</code></td></tr><tr><td><code>.js</code></td><td><code>text/javascript</code></td></tr><tr><td><code>.json</code></td><td><code>application/json</code></td></tr><tr><td><code>.md</code></td><td><code>text/markdown</code></td></tr><tr><td><code>.pdf</code></td><td><code>application/pdf</code></td></tr><tr><td><code>.php</code></td><td><code>text/x-php</code></td></tr><tr><td><code>.pptx</code></td><td><code>application/vnd.openxmlformats-officedocument.presentationml.presentation</code></td></tr><tr><td><code>.py</code></td><td><code>text/x-python</code></td></tr><tr><td><code>.py</code></td><td><code>text/x-script.python</code></td></tr><tr><td><code>.rb</code></td><td><code>text/x-ruby</code></td></tr><tr><td><code>.sh</code></td><td><code>application/x-sh</code></td></tr><tr><td><code>.tex</code></td><td><code>text/x-tex</code></td></tr><tr><td><code>.ts</code></td><td><code>application/typescript</code></td></tr><tr><td><code>.txt</code></td><td><code>text/plain</code></td></tr></tbody></table><div class="docs-footer"><div class="docs-feedback">Was this page useful?<button type="button" tabindex="0" class="btn btn-sm btn-filled btn-neutral docs-feedback-btn" aria-label="Helpful" aria-haspopup="true" aria-expanded="false"><span class="btn-label-wrap"><span class="btn-label-inner"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.132 2.504a1 1 0 0 1 .992-.496l.454.056a4 4 0 0 1 3.327 5.146L16.354 9h.718c2.638 0 4.553 2.508 3.86 5.053l-1.364 5A4 4 0 0 1 15.708 22H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3h2c.26 0 .5-.14.628-.364l3.504-6.132ZM10 20h5.709a2 2 0 0 0 1.93-1.474l1.363-5A2 2 0 0 0 17.072 11H15a1 1 0 0 1-.956-1.294l.95-3.084a2 2 0 0 0-1.462-2.537l-3.168 5.543A2.723 2.723 0 0 1 9 10.81V19a1 1 0 0 0 1 1Zm-3-9v8c0 .35.06.687.17 1H6a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h1Z" clip-rule="evenodd"></path></svg></span></span></button><button type="button" tabindex="0" class="btn btn-sm btn-filled btn-neutral docs-feedback-btn" aria-label="Thumbs down" aria-haspopup="true" aria-expanded="false"><span class="btn-label-wrap"><span class="btn-label-inner"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M11.873 21.496a1 1 0 0 1-.992.496l-.454-.056A4 4 0 0 1 7.1 16.79L7.65 15h-.718c-2.637 0-4.553-2.508-3.859-5.052l1.364-5A4 4 0 0 1 8.296 2h9.709a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-2c-.26 0-.5.14-.628.364l-3.504 6.132ZM14.005 4h-5.71a2 2 0 0 0-1.929 1.474l-1.363 5A2 2 0 0 0 6.933 13h2.072a1 1 0 0 1 .955 1.294l-.949 3.084a2 2 0 0 0 1.462 2.537l3.167-5.543a2.723 2.723 0 0 1 1.364-1.182V5a1 1 0 0 0-1-1Zm3 9V5c0-.35-.06-.687-.171-1h1.17a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1Z" clip-rule="evenodd"></path></svg></span></span></button></div></div></div></div></div></div></div></div></div></div></div></div></div></div></main><div data-testid="compliance-management-wrapper"><span data-testid="cookie-consent-modal-header"></span></div></div><div class="layers-root"></div></div>
+      <script nonce="" nomodule="">!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
+      <script nonce="" nomodule="" crossorigin="" id="vite-legacy-polyfill" src="./Assistants File Search - OpenAI API_files/polyfills-legacy-bMp4lbk-.js"></script>
+      <script nonce="" nomodule="" crossorigin="" id="vite-legacy-entry" data-src="/static/index-legacy-Bp7BsN8h.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
+    <script nonce="">(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.nonce='860f6764cdd83ce582ca1e98b11b373e';d.innerHTML="window.__CF$cv$params={r:'8e1e54635f4eb742',t:'MTczMTQ5NjM3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='860f6764cdd83ce582ca1e98b11b373e';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;" src="./Assistants File Search - OpenAI API_files/saved_resource.html"></iframe>
+
+<div class="CRjGu"></div><iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./Assistants File Search - OpenAI API_files/saved_resource(1).html"></iframe><div class="intercom-lightweight-app"><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #202123;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 40px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 20px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #202123
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body><grazie-wrapper style="z-index: 2147483647; position: absolute; top: 0px; left: 0px; width: 0px; height: 0px; pointer-events: none; visibility: initial;"><grazie-shadow-root-wrapper style="all: initial;"><template shadowrootmode="open"><link type="text/css" title="Grazie Styles" rel="stylesheet" href="chrome-extension://fonaoompfjljjllgccccgjnhnoghohgc/content-script/content-script.css"><grazie-popups><grazie-selection-popup-holder></grazie-selection-popup-holder><grazie-selection-ai-button></grazie-selection-ai-button><grazie-selection-ai-menu></grazie-selection-ai-menu><grazie-chat></grazie-chat><grazie-auth-popup></grazie-auth-popup><grazie-report-dialog></grazie-report-dialog><grazie-tooltips></grazie-tooltips></grazie-popups></template></grazie-shadow-root-wrapper><script src="chrome-extension://fonaoompfjljjllgccccgjnhnoghohgc/injection/injection.js"></script></grazie-wrapper></html>

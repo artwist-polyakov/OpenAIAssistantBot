@@ -7,8 +7,8 @@ from dataclasses import dataclass
 from typing import Dict
 from dotenv import load_dotenv, set_key
 from openai import AsyncOpenAI
-from telegram import Update
-from telegram.constants import ChatAction
+from telegram import Update, Message
+from telegram.constants import ChatAction, ChatType
 from telegram.ext import (
     ApplicationBuilder,
     ContextTypes,
@@ -31,6 +31,9 @@ USERS = os.getenv('USERS', '*')
 THREAD_LIFETIME_HOURS = int(os.getenv('THREAD_LIFETIME_HOURS', '24'))
 if USERS != '*':
     USERS = [user.strip() for user in USERS.split(',')]
+
+# В начале файла добавим глобальную переменную
+bot_info = None
 
 @dataclass
 class ThreadInfo:
@@ -92,7 +95,33 @@ async def check_thread_exists(thread_id):
         logging.warning(f"Thread {thread_id} not found: {e}")
         return False
 
+async def should_bot_respond(message: Message, context: ContextTypes.DEFAULT_TYPE) -> bool:
+    # Для личных чатов всегда отвечаем
+    if message.chat.type == ChatType.PRIVATE:
+        return True
+    
+    # Используем глобальную переменную bot_info
+    global bot_info
+    
+    # Проверяем, является ли сообщение ответом на сообщение бота
+    if message.reply_to_message and message.reply_to_message.from_user.id == bot_info.id:
+        return True
+    
+    # Проверяем, упомянут ли бот в сообщении
+    if message.entities:
+        for entity in message.entities:
+            if entity.type == 'mention':
+                username = message.text[entity.offset:entity.offset + entity.length]
+                if username.lower() == f'@{bot_info.username.lower()}':
+                    return True
+    
+    return False
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # Проверяем, должен ли бот ответить на это сообщение
+    if not await should_bot_respond(update.message, context):
+        return
+
     user = update.effective_user
     username = user.username
     user_id = user.id
@@ -145,6 +174,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Отправка ответа пользователю
     await update.message.reply_text(response)
 
+async def init_bot(application):
+    """Инициализация бота и получение информации о нем"""
+    global bot_info
+    bot_info = await application.bot.get_me()
+    logging.info(f"Bot initialized: @{bot_info.username}")
+
 def main():
     # Включаем job_queue при создании приложения
     application = (
@@ -162,6 +197,9 @@ def main():
         await cleanup_old_threads()
 
     application.job_queue.run_repeating(cleanup_job, interval=3600)
+
+    # Инициализируем бота перед запуском
+    application.run_async(init_bot(application))
 
     # Запускаем бота
     application.run_polling()

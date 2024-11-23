@@ -4,3 +4,5 @@ services:
     build: ./src
     env_file:
       - .env
+    volumes:
+      - ./data:/app/data

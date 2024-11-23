@@ -157,14 +157,14 @@ async def should_bot_respond(
     # Проверяем бан пользователя
     if user_id in BANNED_USERS:
         await message.reply_text(
-            f"⛔️ Вы заблокированы.\nПричина: {BANNED_USERS[user_id]}"
+            f"⛔️ Вы заблокированы.\n\nПричина: {BANNED_USERS[user_id]}"
         )
         return False
 
     # Проверяем бан чата
     if chat_id in BANNED_CHATS:
         await message.reply_text(
-            f"⛔️ Этот чат заблокирован.\nПричина: {BANNED_CHATS[chat_id]}"
+            f"⛔️ Этот чат заблокирован.\n\nПричина: {BANNED_CHATS[chat_id]}"
         )
         return False
 

@@ -224,7 +224,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=update.effective_chat.id, action=ChatAction.TYPING
     )
 
-    # Проверяем существование треда или создаем новый
+    # П��оверяем существование треда или создаем новый
     thread_info = user_threads.get(user_id)
     if thread_info is None or not await check_thread_exists(thread_info.thread_id):
         thread = await client.beta.threads.create()
@@ -372,10 +372,8 @@ def main():
 
     # Добавляем обработчики команд
     application.add_handler(CommandHandler("chatinfo", get_chat_info))
-    application.add_handler(
-        CommandHandler("adminchats", get_admin_chats)
-    )  # Новая команда
-    application.add_handler(CommandHandler("checkstatus", check_chat_status))
+    application.add_handler(CommandHandler("adminchats", get_admin_chats))
+    application.add_handler(CommandHandler("listchats", list_known_chats))
 
     message_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message)
     application.add_handler(message_handler)
@@ -385,16 +383,6 @@ def main():
         await cleanup_old_threads()
 
     application.job_queue.run_repeating(cleanup_job, interval=3600)
-
-    # Добавляем обработчик изменений статуса бота
-    application.add_handler(
-        MessageHandler(
-            filters.StatusUpdate.MY_CHAT_MEMBER, track_bot_chat_member_updates
-        )
-    )
-
-    # Добавляем новую команду
-    application.add_handler(CommandHandler("listchats", list_known_chats))
 
     # Запускаем бота
     application.run_polling()

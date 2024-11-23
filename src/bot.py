@@ -18,6 +18,9 @@ from telegram.ext import (
     JobQueue,
     Application,
 )
+import json
+from pathlib import Path
+from chat_manager import ChatManager
 
 load_dotenv()
 client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -66,6 +69,9 @@ if ALLOWED_CHATS != "*":
 
 # В начале файла добавим глобальную переменную
 bot_info = None
+
+# После загрузки переменных окружения
+chat_manager = ChatManager()
 
 
 @dataclass
@@ -190,6 +196,18 @@ async def should_bot_respond(
 
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # В начале функции добавим обновление информации о чате
+    chat = update.effective_chat
+    chat_manager.update_chat(
+        chat_id=chat.id,
+        chat_type=chat.type,
+        name=(
+            chat.title
+            if chat.title
+            else f"Private chat with {update.effective_user.username}"
+        ),
+    )
+
     # Проверяем, должен ли бот ответить на это сообщение
     if not await should_bot_respond(update.message, context):
         return
@@ -317,6 +335,31 @@ async def get_admin_chats(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
+async def list_known_chats(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Показывает список всех известных чатов"""
+    user = update.effective_user
+    if USERS != "*" and user.username not in USERS:
+        await update.message.reply_text("У вас нет доступа к этой команде.")
+        return
+
+    chats = chat_manager.get_all_chats()
+    if not chats:
+        await update.message.reply_text("📝 Список чатов пуст.")
+        return
+
+    message = "📝 Известные чаты:\n\n"
+    for chat_id, info in chats.items():
+        message += (
+            f"📌 {info.name}\n"
+            f"ID: {chat_id}\n"
+            f"Тип: {info.chat_type}\n"
+            f"Первое сообщение: {info.first_seen}\n"
+            f"Последнее сообщение: {info.last_message}\n\n"
+        )
+
+    await update.message.reply_text(message)
+
+
 def main():
     # Включаем job_queue при создании приложения
     application = (
@@ -332,6 +375,7 @@ def main():
     application.add_handler(
         CommandHandler("adminchats", get_admin_chats)
     )  # Новая команда
+    application.add_handler(CommandHandler("checkstatus", check_chat_status))
 
     message_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message)
     application.add_handler(message_handler)
@@ -341,6 +385,16 @@ def main():
         await cleanup_old_threads()
 
     application.job_queue.run_repeating(cleanup_job, interval=3600)
+
+    # Добавляем обработчик изменений статуса бота
+    application.add_handler(
+        MessageHandler(
+            filters.StatusUpdate.MY_CHAT_MEMBER, track_bot_chat_member_updates
+        )
+    )
+
+    # Добавляем новую команду
+    application.add_handler(CommandHandler("listchats", list_known_chats))
 
     # Запускаем бота
     application.run_polling()

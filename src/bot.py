@@ -161,15 +161,13 @@ async def should_bot_respond(
         )
         return False
 
-    # Проверяем бан чата
-    if chat_id in BANNED_CHATS:
-        await message.reply_text(
-            f"⛔️ Этот чат заблокирован.\n\nПричина: {BANNED_CHATS[chat_id]}"
-        )
-        return False
-
-    # Для личных чатов проверяем только пользователя
+    # Для личных чатов проверяем бан чата сразу
     if message.chat.type == ChatType.PRIVATE:
+        if chat_id in BANNED_CHATS:
+            await message.reply_text(
+                f"⛔️ Этот чат заблокирован.\n\nПричина: {BANNED_CHATS[chat_id]}"
+            )
+            return False
         return True
 
     # Проверяем, разрешен ли этот чат
@@ -179,22 +177,29 @@ async def should_bot_respond(
     # Используем глобальную переменную bot_info
     global bot_info
 
-    # Проверяем, является ли сообщение ответом на сообщение бота
-    if (
+    # Проверяем, является ли сообщение ответом на сообщение бота или есть упоминание
+    is_reply_to_bot = (
         message.reply_to_message
         and message.reply_to_message.from_user.id == bot_info.id
-    ):
-        return True
+    )
+    is_mention = False
 
-    # Проверяем, упомянут ли бот в сообщении
     if message.entities:
         for entity in message.entities:
             if entity.type == "mention":
                 username = message.text[entity.offset : entity.offset + entity.length]
                 if username.lower() == f"@{bot_info.username.lower()}":
-                    return True
+                    is_mention = True
+                    break
 
-    return False
+    # Если это обращение к боту и чат забанен, показываем сообщение
+    if (is_reply_to_bot or is_mention) and chat_id in BANNED_CHATS:
+        await message.reply_text(
+            f"⛔️ Этот чат заблокирован.\n\nПричина: {BANNED_CHATS[chat_id]}"
+        )
+        return False
+
+    return is_reply_to_bot or is_mention
 
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):

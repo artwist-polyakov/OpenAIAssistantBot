@@ -46,7 +46,8 @@ if banned_users_str:
         for ban_entry in banned_users_str.split(","):
             if ":" in ban_entry:
                 user_id, reason = ban_entry.strip().split(":", 1)
-                BANNED_USERS[int(user_id.strip())] = reason.strip()
+                reason = reason.replace("\\n", "\n").strip()
+                BANNED_USERS[int(user_id.strip())] = reason
     except Exception as e:
         logging.error(f"Error parsing BANNED_USERS: {e}")
 
@@ -57,7 +58,8 @@ if banned_chats_str:
         for ban_entry in banned_chats_str.split(","):
             if ":" in ban_entry:
                 chat_id, reason = ban_entry.strip().split(":", 1)
-                BANNED_CHATS[int(chat_id.strip())] = reason.strip()
+                reason = reason.replace("\\n", "\n").strip()
+                BANNED_CHATS[int(chat_id.strip())] = reason
     except Exception as e:
         logging.error(f"Error parsing BANNED_CHATS: {e}")
 
@@ -224,7 +226,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=update.effective_chat.id, action=ChatAction.TYPING
     )
 
-    # П��оверяем существование треда или создаем новый
+    # Поверяем существование треда или создаем новый
     thread_info = user_threads.get(user_id)
     if thread_info is None or not await check_thread_exists(thread_info.thread_id):
         thread = await client.beta.threads.create()

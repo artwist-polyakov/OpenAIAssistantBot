@@ -21,9 +21,13 @@ from telegram.ext import (
 import json
 from pathlib import Path
 from chat_manager import ChatManager
+import signal
 
 load_dotenv()
-client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = AsyncOpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    default_headers={"OpenAI-Beta": "assistants=v2"},
+)
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
@@ -72,7 +76,7 @@ if ALLOWED_CHATS != "*":
 # В начале файла добавим глобальную переменную
 bot_info = None
 
-# После загрузки переменных окружения
+# После загрузки переменых окружения
 chat_manager = ChatManager()
 
 
@@ -202,6 +206,53 @@ async def should_bot_respond(
     return is_reply_to_bot or is_mention
 
 
+class EventHandler:
+    def __init__(self, bot_message):
+        self.bot_message = bot_message
+        self.collected_message = ""
+        self.last_update_time = datetime.now()
+
+    async def on_message(self, message) -> None:
+        if not message.content or not message.content[0].text:
+            return
+
+        text = message.content[0].text.value
+        if text == self.collected_message:
+            return
+
+        self.collected_message = text
+        current_time = datetime.now()
+
+        if (current_time - self.last_update_time).total_seconds() >= 0.5:
+            try:
+                await self.bot_message.edit_text(self.collected_message)
+                self.last_update_time = current_time
+                logging.info(f"Updated message: {text[:100]}...")
+            except Exception as e:
+                logging.error(f"Error updating message: {e}")
+
+    async def on_tool_outputs(self, tool_outputs: list) -> None:
+        # Этот метод может понадобиться в будущем
+        pass
+
+    async def on_run_step(self, run) -> None:
+        logging.info(f"Run status: {run.status}")
+        if run.status == "completed":
+            try:
+                await self.bot_message.edit_text(self.collected_message)
+            except Exception as e:
+                logging.error(f"Error in final message update: {e}")
+
+    async def on_error(self, error: str) -> None:
+        logging.error(f"Stream error: {error}")
+        try:
+            await self.bot_message.edit_text(
+                "❌ Произошла ошибка при генерации ответа."
+            )
+        except Exception as e:
+            logging.error(f"Error updating error message: {e}")
+
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # В начале функции добавим обновление информации о чате
     chat = update.effective_chat
@@ -248,26 +299,58 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         thread_id=thread_id, role="user", content=update.message.text
     )
 
-    # Запускаем ассистента в существующем Thread
-    run = await client.beta.threads.runs.create(
-        thread_id=thread_id, assistant_id=ASSISTANT_ID
-    )
+    # Отправляем начальное сообщение
+    bot_message = await update.message.reply_text("⌛️ Думаю...")
 
-    # Ожидание завершения работы ассистента
-    while True:
-        run = await client.beta.threads.runs.retrieve(
-            thread_id=thread_id, run_id=run.id
+    try:
+        # Создаем run
+        run = await client.beta.threads.runs.create(
+            thread_id=thread_id, assistant_id=ASSISTANT_ID
         )
-        if run.completed_at:
-            break
-        await asyncio.sleep(2)
+        logging.info(f"Created run {run.id} for thread {thread_id}")
 
-    # Получение ответа от ассистента
-    messages = await client.beta.threads.messages.list(thread_id=thread_id)
-    response = messages.data[0].content[0].text.value
+        current_message = ""
+        while True:
+            # Получаем статус run
+            run_status = await client.beta.threads.runs.retrieve(
+                thread_id=thread_id, run_id=run.id
+            )
 
-    # Отправка ответа пользователю
-    await update.message.reply_text(response)
+            # Получаем сообщения
+            messages = await client.beta.threads.messages.list(
+                thread_id=thread_id, order="desc", limit=1
+            )
+
+            if messages.data:
+                message = messages.data[0]
+                if message.content and message.content[0].text:
+                    new_text = message.content[0].text.value
+                    if new_text != current_message:
+                        current_message = new_text
+                        try:
+                            await bot_message.edit_text(current_message)
+                            logging.info(f"Updated message: {current_message[:100]}...")
+                        except Exception as e:
+                            logging.error(f"Error updating message: {e}")
+
+            # Проверяем статус
+            if run_status.status == "completed":
+                break
+            elif run_status.status == "failed":
+                await bot_message.edit_text("❌ Произошла ошибка при генерации ответа.")
+                if hasattr(run_status, "last_error"):
+                    logging.error(f"Run failed: {run_status.last_error}")
+                break
+            elif run_status.status == "expired":
+                await bot_message.edit_text("⚠️ Время ожидания ответа истекло.")
+                break
+
+            # Небольшая пауза перед следующей проверкой
+            await asyncio.sleep(0.1)  # Уменьшаем интервал для более частых обновлений
+
+    except Exception as e:
+        logging.error(f"Error in message handling: {e}")
+        await bot_message.edit_text("❌ Произошла ошибка при генерации ответа.")
 
 
 async def init_bot(application):
@@ -360,39 +443,59 @@ async def list_known_chats(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"📌 {info.name}\n"
             f"ID: {chat_id}\n"
             f"Тип: {info.chat_type}\n"
-            f"Первое сообщение: {info.first_seen}\n"
+            f"Певое сообщение: {info.first_seen}\n"
             f"Последнее сообщение: {info.last_message}\n\n"
         )
 
     await update.message.reply_text(message)
 
 
+async def shutdown(application: Application):
+    """Корректное завершение работы бота"""
+    logging.info("Shutting down...")
+    await application.stop()
+    await application.shutdown()
+
+
 def main():
-    # Включаем job_queue при создании приложения
+    # Создаем приложение
     application = (
         ApplicationBuilder()
         .token(BOT_TOKEN)
         .job_queue(JobQueue())
-        .post_init(post_init)  # Добавляем пост-инициализацию
+        .post_init(post_init)
         .build()
     )
 
-    # Добавляем обработчики команд
+    # Добавляем обработчики
     application.add_handler(CommandHandler("chatinfo", get_chat_info))
     application.add_handler(CommandHandler("adminchats", get_admin_chats))
     application.add_handler(CommandHandler("listchats", list_known_chats))
+    application.add_handler(
+        MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message)
+    )
 
-    message_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message)
-    application.add_handler(message_handler)
-
-    # Добавляем задачу очистки как job в application
+    # Добавляем задачу очистки
     async def cleanup_job(context: ContextTypes.DEFAULT_TYPE):
         await cleanup_old_threads()
 
     application.job_queue.run_repeating(cleanup_job, interval=3600)
 
-    # Запускаем бота
-    application.run_polling()
+    # Настраиваем обработку сигналов для graceful shutdown
+    loop = asyncio.get_event_loop()
+    for sig in (signal.SIGTERM, signal.SIGINT):
+        loop.add_signal_handler(
+            sig, lambda s=sig: asyncio.create_task(shutdown(application))
+        )
+
+    try:
+        # Запускаем бота
+        application.run_polling(stop_signals=None)
+    except Exception as e:
+        logging.error(f"Error running bot: {e}")
+    finally:
+        # Убеждаемся, что бот корректно остановлен
+        loop.run_until_complete(shutdown(application))
 
 
 if __name__ == "__main__":

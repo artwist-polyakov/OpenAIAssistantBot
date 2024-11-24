@@ -300,73 +300,6 @@ async def get_chat_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(info_message)
 
 
-async def get_admin_chats(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Команда для получения списка чатов, где бот является администратором"""
-    # Проверяем, что команду вызвал разрешенный пользователь
-    user = update.effective_user
-    if USERS != "*" and user.username not in USERS:
-        await update.message.reply_text("У вас нет доступа к этой команде.")
-        return
-
-    message = "🤖 Список групп, где я администратор:\n\n"
-    found_chats = False
-
-    try:
-        # Получаем список чатов, где бот состоит
-        updates = await context.bot.get_updates(offset=-1, timeout=1)
-        my_chats = set()
-
-        for upd in updates:
-            if upd.my_chat_member:
-                chat = upd.my_chat_member.chat
-                if chat.type in [ChatType.GROUP, ChatType.SUPERGROUP, ChatType.CHANNEL]:
-                    member = await context.bot.get_chat_member(chat.id, context.bot.id)
-                    if member.status in ["administrator", "creator"]:
-                        found_chats = True
-                        message += (
-                            f"📌 {chat.title}\n"
-                            f"ID: {chat.id}\n"
-                            f"Тип: {chat.type}\n"
-                            f"Статус: {member.status}\n\n"
-                        )
-
-        if not found_chats:
-            message = "❌ Я не являюсь администратором ни в одной группе."
-
-        await update.message.reply_text(message)
-
-    except Exception as e:
-        logging.error(f"Error in get_admin_chats: {e}")
-        await update.message.reply_text(
-            "❌ Произошла ошибка при получении списка групп."
-        )
-
-
-async def list_known_chats(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Показывает список всех известных чатов"""
-    user = update.effective_user
-    if USERS != "*" and user.username not in USERS:
-        await update.message.reply_text("У вас нет доступа к этой команде.")
-        return
-
-    chats = chat_manager.get_all_chats()
-    if not chats:
-        await update.message.reply_text("📝 Список чатов пуст.")
-        return
-
-    message = "📝 Известные чаты:\n\n"
-    for chat_id, info in chats.items():
-        message += (
-            f"📌 {info.name}\n"
-            f"ID: {chat_id}\n"
-            f"Тип: {info.chat_type}\n"
-            f"Первое сообщение: {info.first_seen}\n"
-            f"Последнее сообщение: {info.last_message}\n\n"
-        )
-
-    await update.message.reply_text(message)
-
-
 def main():
     # Включаем job_queue при создании приложения
     application = (
@@ -379,8 +312,6 @@ def main():
 
     # Добавляем обработчики команд
     application.add_handler(CommandHandler("chatinfo", get_chat_info))
-    application.add_handler(CommandHandler("adminchats", get_admin_chats))
-    application.add_handler(CommandHandler("listchats", list_known_chats))
 
     message_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message)
     application.add_handler(message_handler)

@@ -21,6 +21,8 @@ from telegram.ext import (
 import json
 from pathlib import Path
 from chat_manager import ChatManager
+import sentry_sdk
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 load_dotenv()
 client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -74,6 +76,22 @@ bot_info = None
 
 # После загрузки переменных окружения
 chat_manager = ChatManager()
+
+# Инициализация Sentry
+SENTRY_DSN = os.getenv("SENTRY_DSN")
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        traces_sample_rate=1.0,
+        profiles_sample_rate=1.0,
+        integrations=[
+            LoggingIntegration(
+                level=logging.INFO,  # Capture INFO and above as breadcrumbs
+                event_level=logging.ERROR,  # Send errors as events
+            ),
+        ],
+    )
+    logging.info("Sentry monitoring initialized")
 
 
 @dataclass
@@ -203,71 +221,79 @@ async def should_bot_respond(
 
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # В начале функции добавим обновление информации о чате
-    chat = update.effective_chat
-    chat_manager.update_chat(
-        chat_id=chat.id,
-        chat_type=chat.type,
-        name=(
-            chat.title
-            if chat.title
-            else f"Private chat with {update.effective_user.username}"
-        ),
-    )
-
-    # Проверяем, должен ли бот ответить на это сообщение
-    if not await should_bot_respond(update.message, context):
-        return
-
-    user = update.effective_user
-    username = user.username
-    user_id = user.id
-
-    if USERS != "*" and username not in USERS:
-        await update.message.reply_text("У вас нет доступа к боту.")
-        return
-
-    await context.bot.send_chat_action(
-        chat_id=update.effective_chat.id, action=ChatAction.TYPING
-    )
-
-    # Поверяем существование треда или создаем новый
-    thread_info = user_threads.get(user_id)
-    if thread_info is None or not await check_thread_exists(thread_info.thread_id):
-        thread = await client.beta.threads.create()
-        await update_thread_access(user_id, thread.id)
-        logging.info(f"Created new thread {thread.id} for user {user_id}")
-        thread_id = thread.id
-    else:
-        thread_id = thread_info.thread_id
-        # Обновляем время последнего обращения
-        await update_thread_access(user_id, thread_id)
-
-    # Добавляем сообщение в существующий Thread
-    await client.beta.threads.messages.create(
-        thread_id=thread_id, role="user", content=update.message.text
-    )
-
-    # Запускаем ассистента в существующем Thread
-    run = await client.beta.threads.runs.create(
-        thread_id=thread_id, assistant_id=ASSISTANT_ID
-    )
-
-    # Ожидание завершения работы ассистента
-    while True:
-        run = await client.beta.threads.runs.retrieve(
-            thread_id=thread_id, run_id=run.id
+    try:
+        # В начале функции добавим обновление информации о чате
+        chat = update.effective_chat
+        chat_manager.update_chat(
+            chat_id=chat.id,
+            chat_type=chat.type,
+            name=(
+                chat.title
+                if chat.title
+                else f"Private chat with {update.effective_user.username}"
+            ),
         )
-        if run.completed_at:
-            break
-        await asyncio.sleep(2)
 
-    # Получение ответа от ассистента
-    messages = await client.beta.threads.messages.list(thread_id=thread_id)
-    response = messages.data[0].content[0].text.value
+        # Проверяем, должен ли бот ответить на это сообщение
+        if not await should_bot_respond(update.message, context):
+            return
 
-    # Отправка ответа пользователю
-    await update.message.reply_text(response)
+        user = update.effective_user
+        username = user.username
+        user_id = user.id
+
+        if USERS != "*" and username not in USERS:
+            await update.message.reply_text("У вас нет доступа к боту.")
+            return
+
+        await context.bot.send_chat_action(
+            chat_id=update.effective_chat.id, action=ChatAction.TYPING
+        )
+
+        # Поверяем существование треда или создаем новый
+        thread_info = user_threads.get(user_id)
+        if thread_info is None or not await check_thread_exists(thread_info.thread_id):
+            thread = await client.beta.threads.create()
+            await update_thread_access(user_id, thread.id)
+            logging.info(f"Created new thread {thread.id} for user {user_id}")
+            thread_id = thread.id
+        else:
+            thread_id = thread_info.thread_id
+            # Обновляем время последнего обращения
+            await update_thread_access(user_id, thread_id)
+
+        # Добавляем сообщение в существующий Thread
+        await client.beta.threads.messages.create(
+            thread_id=thread_id, role="user", content=update.message.text
+        )
+
+        # Запускаем ассистента в существующем Thread
+        run = await client.beta.threads.runs.create(
+            thread_id=thread_id, assistant_id=ASSISTANT_ID
+        )
+
+        # Ожидание завершения работы ассистента
+        while True:
+            run = await client.beta.threads.runs.retrieve(
+                thread_id=thread_id, run_id=run.id
+            )
+            if run.completed_at:
+                break
+            await asyncio.sleep(2)
+
+        # Получение ответа от ассистента
+        messages = await client.beta.threads.messages.list(thread_id=thread_id)
+        response = messages.data[0].content[0].text.value
+
+        # Отправка ответа пользователю
+        await update.message.reply_text(response)
+
+    except Exception as e:
+        logging.error(f"Error in handle_message: {e}")
+        sentry_sdk.capture_exception(e)
+        await update.message.reply_text(
+            "Произошла ошибка при обработке сообщения. Пожалуйста, попробуйте позже."
+        )
 
 
 async def init_bot(application):

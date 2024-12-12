@@ -110,17 +110,22 @@ user_threads: Dict[int, ThreadInfo] = {}  # словарь для быстрог
 
 
 async def delete_all_threads():
-    """Удаляет все треды в OpenAI"""
+    """Удаляет треды из локального хранилища"""
     try:
-        threads = await client.beta.threads.list()
-        for thread in threads.data:
+        # Очищаем локальные треды
+        for user_id, thread_info in list(user_threads.items()):
             try:
-                await client.beta.threads.delete(thread.id)
-                logging.info(f"Удален тред {thread.id}")
+                await client.beta.threads.delete(thread_info.thread_id)
+                logging.info(f"Удален тред {thread_info.thread_id}")
+                del user_threads[user_id]
             except Exception as e:
-                logging.error(f"Ошибка при удалении треда {thread.id}: {e}")
+                logging.error(f"Ошибка при удалении треда {thread_info.thread_id}: {e}")
+
+        # Очищаем heap
+        thread_heap.clear()
+
     except Exception as e:
-        logging.error(f"Ошибка при получении списка тредов: {e}")
+        logging.error(f"Ошибка при очистке тредов: {e}")
 
 
 async def reset_thread(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -360,7 +365,7 @@ async def init_bot(application):
 
 
 async def post_init(application: Application) -> None:
-    """Пост-инициализация п��иложения"""
+    """Пост-инициализация приложения"""
     await init_bot(application)
 
 

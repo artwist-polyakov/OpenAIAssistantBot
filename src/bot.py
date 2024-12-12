@@ -23,6 +23,7 @@ from pathlib import Path
 from chat_manager import ChatManager
 import sentry_sdk
 from sentry_sdk.integrations.logging import LoggingIntegration
+import re
 
 load_dotenv()
 client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -36,6 +37,8 @@ ASSISTANT_ID = os.getenv("ASSISTANT_ID")
 USERS = os.getenv("USERS", "*")
 ALLOWED_CHATS = os.getenv("ALLOWED_CHATS", "*")
 THREAD_LIFETIME_HOURS = int(os.getenv("THREAD_LIFETIME_HOURS", "24"))
+REMOVE_CHUNKS_FOR_FILES = os.getenv("REMOVE_CHUNKS_FOR_FILES", "links.txt").split(",")
+REMOVE_CHUNK_MARKERS = os.getenv("REMOVE_CHUNK_MARKERS", "true").lower() == "true"
 
 # Загрузка списков банов
 BANNED_USERS = {}
@@ -110,7 +113,7 @@ user_threads: Dict[int, ThreadInfo] = {}  # словарь для быстрог
 
 
 async def delete_all_threads():
-    """Удаляет треды из локального хранилища"""
+    """Удаляет треды из ло��ального хранилища"""
     try:
         # Очищаем локальные треды
         for user_id, thread_info in list(user_threads.items()):
@@ -203,7 +206,7 @@ async def cleanup_old_threads():
 
 
 async def update_thread_access(user_id: int, thread_id: str):
-    """Обновление времени последнего доступа к треду"""
+    """Обновление времени ��оследнего доступа к треду"""
     current_time = datetime.now()
 
     # Создаем новый ThreadInfo
@@ -230,7 +233,7 @@ async def check_thread_exists(thread_id):
 async def should_bot_respond(
     message: Message, context: ContextTypes.DEFAULT_TYPE
 ) -> bool:
-    # Проверяем, что сообщение существует и содержит нужные атрибуты
+    # Проверяем, что сообщение существует и содержит нжные атрибуты
     if not message or not message.from_user:
         logging.warning("Получено сообщение без необходимых атрибутов")
         return False
@@ -303,6 +306,37 @@ async def should_bot_respond(
     return is_reply_to_bot or is_mention
 
 
+async def clean_assistant_response(response: str) -> str:
+    """Очищает ответ ассистента от технических метаданных"""
+    cleaned = response
+
+    # Если в списке есть звездочка, удаляем все чанки
+    if "*" in REMOVE_CHUNKS_FOR_FILES:
+        cleaned = re.sub(r"【\d+:\d+†[^】]+】", "", cleaned)
+        return cleaned.strip()
+
+    # Иначе обрабатываем по файлам
+    for filename in REMOVE_CHUNKS_FOR_FILES:
+        filename = filename.strip()
+        if filename:
+            # Полностью удаляем чанки для указанных файлов
+            cleaned = re.sub(r"【\d+:\d+†" + re.escape(filename) + r"】", "", cleaned)
+
+    if REMOVE_CHUNK_MARKERS:
+        # Заменяем маркеры на пробел + имя файла + пробел
+        cleaned = re.sub(
+            r"【\d+:\d+†([^】]+)】", lambda m: f" ({m.group(1)}) ", cleaned
+        )
+
+    # Исправляем множественные пробелы и переносы строк
+    cleaned = re.sub(r" +", " ", cleaned)  # Множественные пробелы
+    cleaned = re.sub(r"\n\s*\n\s*\n", "\n\n", cleaned)  # Множественные переносы
+    cleaned = re.sub(r" +\n", "\n", cleaned)  # Пробелы перед переносом
+    cleaned = re.sub(r"\n +", "\n", cleaned)  # Пробелы после переноса
+
+    return cleaned.strip()
+
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         if not update.effective_chat or not update.effective_user or not update.message:
@@ -372,8 +406,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         messages = await client.beta.threads.messages.list(thread_id=thread_id)
         response = messages.data[0].content[0].text.value
 
-        # Отправка ответа пользователю
-        await update.message.reply_text(response)
+        # Очищаем ответ перед отправкой
+        cleaned_response = await clean_assistant_response(response)
+
+        # Отправляем очищенный ответ пользователю
+        await update.message.reply_text(cleaned_response)
 
     except Exception as e:
         logging.error(f"Error in handle_message: {e}")
@@ -441,7 +478,7 @@ def main():
 
     application.job_queue.run_repeating(cleanup_job, interval=3600)
 
-    # За��ускаем бота
+    # Запускаем бота
     application.run_polling()
 
 

@@ -109,36 +109,92 @@ thread_heap = []  # heap для быстрого доступа к старым 
 user_threads: Dict[int, ThreadInfo] = {}  # словарь для быстрого доступа по user_id
 
 
+async def delete_all_threads():
+    """Удаляет все треды в OpenAI"""
+    try:
+        threads = await client.beta.threads.list()
+        for thread in threads.data:
+            try:
+                await client.beta.threads.delete(thread.id)
+                logging.info(f"Удален тред {thread.id}")
+            except Exception as e:
+                logging.error(f"Ошибка при удалении треда {thread.id}: {e}")
+    except Exception as e:
+        logging.error(f"Ошибка при получении списка тредов: {e}")
+
+
+async def reset_thread(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Сбрасывает тред пользователя"""
+    try:
+        user_id = update.effective_user.id
+        thread_info = user_threads.get(user_id)
+
+        if thread_info:
+            # Удаляем старый тред
+            try:
+                await client.beta.threads.delete(thread_info.thread_id)
+                logging.info(
+                    f"Удален тред {thread_info.thread_id} для пользователя {user_id}"
+                )
+            except Exception as e:
+                logging.error(f"Ошибка при удалении треда: {e}")
+
+            # Удаляем информацию о треде из структур данных
+            if user_id in user_threads:
+                del user_threads[user_id]
+
+            await update.message.reply_text("✅ История диалога очищена.")
+        else:
+            await update.message.reply_text("ℹ️ У вас нет активного диалога.")
+
+    except Exception as e:
+        logging.error(f"Ошибка в reset_thread: {e}")
+        await update.message.reply_text("❌ Произошла ошибка при сбросе диалога.")
+
+
+async def startup(application: Application):
+    """Действия при запуске бота"""
+    await init_bot(application)
+    logging.info("Очистка всех тредов при запуске...")
+    await delete_all_threads()
+
+
 async def cleanup_old_threads():
     """Очистка старых тредов"""
     while True:
         try:
             current_time = datetime.now()
+            threads_to_remove = []
 
-            while thread_heap and current_time - thread_heap[0].last_access > timedelta(
-                hours=THREAD_LIFETIME_HOURS
-            ):
-                oldest_thread = heapq.heappop(thread_heap)
+            # Собираем список тредов для удаления
+            for thread_info in thread_heap:
+                if current_time - thread_info.last_access > timedelta(
+                    hours=THREAD_LIFETIME_HOURS
+                ):
+                    threads_to_remove.append(thread_info)
+                else:
+                    break  # Так как куча отсортирована по времени, остальные треды свежие
+
+            # Удаляем треды
+            for thread_info in threads_to_remove:
                 try:
-                    # Удаляем тред в OpenAI
-                    await client.beta.threads.delete(oldest_thread.thread_id)
-                    # Удаляем из словаря пользователей
-                    if oldest_thread.user_id in user_threads:
-                        del user_threads[oldest_thread.user_id]
+                    await client.beta.threads.delete(thread_info.thread_id)
+                    if thread_info.user_id in user_threads:
+                        del user_threads[thread_info.user_id]
+                    thread_heap.remove(thread_info)
                     logging.info(
-                        f"Deleted thread {oldest_thread.thread_id} "
-                        f"for user {oldest_thread.user_id} due to inactivity"
+                        f"Удален устаревший тред {thread_info.thread_id} "
+                        f"пользователя {thread_info.user_id}"
                     )
                 except Exception as e:
-                    logging.error(f"Error deleting thread: {e}")
-                    # Если произошла ошибка, возвращаем элемент обратно в кучу
-                    heapq.heappush(thread_heap, oldest_thread)
-                    break
+                    logging.error(
+                        f"Ошибка при удалении треда {thread_info.thread_id}: {e}"
+                    )
 
         except Exception as e:
-            logging.error(f"Error in cleanup process: {e}")
+            logging.error(f"Ошибка в процессе очистки: {e}")
 
-        await asyncio.sleep(3600)
+        await asyncio.sleep(3600)  # Проверяем раз в час
 
 
 async def update_thread_access(user_id: int, thread_id: str):
@@ -304,7 +360,7 @@ async def init_bot(application):
 
 
 async def post_init(application: Application) -> None:
-    """Пост-инициализация приложения"""
+    """Пост-инициализация п��иложения"""
     await init_bot(application)
 
 
@@ -327,17 +383,19 @@ async def get_chat_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    # Включаем job_queue при создании приложения
     application = (
         ApplicationBuilder()
         .token(BOT_TOKEN)
         .job_queue(JobQueue())
-        .post_init(post_init)  # Добавляем пост-инициализацию
+        .post_init(startup)  # Заменяем post_init на startup
         .build()
     )
 
     # Добавляем обработчики команд
     application.add_handler(CommandHandler("chatinfo", get_chat_info))
+    application.add_handler(
+        CommandHandler("reset", reset_thread)
+    )  # Добавляем команду reset
 
     message_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message)
     application.add_handler(message_handler)

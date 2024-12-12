@@ -113,9 +113,9 @@ user_threads: Dict[int, ThreadInfo] = {}  # словарь для быстрог
 
 
 async def delete_all_threads():
-    """Удаляет треды из локального хранилища"""
+    """Удаляет треды из ло��ального хранилища"""
     try:
-        # Очищаем лока��ьные треды
+        # Очищаем локальные треды
         for user_id, thread_info in list(user_threads.items()):
             try:
                 await client.beta.threads.delete(thread_info.thread_id)
@@ -206,7 +206,7 @@ async def cleanup_old_threads():
 
 
 async def update_thread_access(user_id: int, thread_id: str):
-    """Обновление времени последнего доступа к треду"""
+    """Обновление времени ��оследнего доступа к треду"""
     current_time = datetime.now()
 
     # Создаем новый ThreadInfo
@@ -233,7 +233,7 @@ async def check_thread_exists(thread_id):
 async def should_bot_respond(
     message: Message, context: ContextTypes.DEFAULT_TYPE
 ) -> bool:
-    # Проверяем, что сообщение существует и содержит н��жные атрибуты
+    # Проверяем, что сообщение существует и содержит нжные атрибуты
     if not message or not message.from_user:
         logging.warning("Получено сообщение без необходимых атрибутов")
         return False
@@ -319,13 +319,21 @@ async def clean_assistant_response(response: str) -> str:
     for filename in REMOVE_CHUNKS_FOR_FILES:
         filename = filename.strip()
         if filename:
+            # Полностью удаляем чанки для указанных файлов
             cleaned = re.sub(r"【\d+:\d+†" + re.escape(filename) + r"】", "", cleaned)
 
     if REMOVE_CHUNK_MARKERS:
-        cleaned = re.sub(r"【\d+:\d+†", "", cleaned)
-        cleaned = re.sub(r"】", "", cleaned)
+        # Заменяем маркеры на пробел + имя файла + пробел
+        cleaned = re.sub(
+            r"【\d+:\d+†([^】]+)】", lambda m: f" ({m.group(1)}) ", cleaned
+        )
 
-    cleaned = re.sub(r"\s+", " ", cleaned)
+    # Исправляем множественные пробелы и переносы строк
+    cleaned = re.sub(r" +", " ", cleaned)  # Множественные пробелы
+    cleaned = re.sub(r"\n\s*\n\s*\n", "\n\n", cleaned)  # Множественные переносы
+    cleaned = re.sub(r" +\n", "\n", cleaned)  # Пробелы перед переносом
+    cleaned = re.sub(r"\n +", "\n", cleaned)  # Пробелы после переноса
+
     return cleaned.strip()
 
 

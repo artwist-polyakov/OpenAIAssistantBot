@@ -230,22 +230,37 @@ async def check_thread_exists(thread_id):
 async def should_bot_respond(
     message: Message, context: ContextTypes.DEFAULT_TYPE
 ) -> bool:
-    chat_id = message.chat.id
-    user_id = message.from_user.id
+    # Проверяем, что сообщение существует и содержит нужные атрибуты
+    if not message or not message.from_user:
+        logging.warning("Получено сообщение без необходимых атрибутов")
+        return False
+
+    chat_id = message.chat_id if message.chat else None
+    user_id = message.from_user.id if message.from_user else None
+
+    if chat_id is None or user_id is None:
+        logging.warning("Сообщение не содержит chat_id или user_id")
+        return False
 
     # Проверяем бан пользователя
     if user_id in BANNED_USERS:
-        await message.reply_text(
-            f"⛔️ Вы заблокированы.\n\nПричина: {BANNED_USERS[user_id]}"
-        )
+        try:
+            await message.reply_text(
+                f"⛔️ Вы заблокированы.\n\nПричина: {BANNED_USERS[user_id]}"
+            )
+        except Exception as e:
+            logging.error(f"Ошибка при отправке сообщения о бане: {e}")
         return False
 
-    # Для личных чатов проверяем бан чата сразу
-    if message.chat.type == ChatType.PRIVATE:
+    # Для личных чатов проверяем бан чата
+    if message.chat and message.chat.type == ChatType.PRIVATE:
         if chat_id in BANNED_CHATS:
-            await message.reply_text(
-                f"⛔️ Этот чат заблокирован.\n\nПричина: {BANNED_CHATS[chat_id]}"
-            )
+            try:
+                await message.reply_text(
+                    f"⛔️ Этот чат заблокирован.\n\nПричина: {BANNED_CHATS[chat_id]}"
+                )
+            except Exception as e:
+                logging.error(f"Ошибка при отправке сообщения о бане чата: {e}")
             return False
         return True
 
@@ -255,14 +270,18 @@ async def should_bot_respond(
 
     # Используем глобальную переменную bot_info
     global bot_info
+    if not bot_info:
+        logging.error("bot_info не инициализирован")
+        return False
 
     # Проверяем, является ли сообщение ответом на сообщение бота или есть упоминание
     is_reply_to_bot = (
         message.reply_to_message
+        and message.reply_to_message.from_user
         and message.reply_to_message.from_user.id == bot_info.id
     )
-    is_mention = False
 
+    is_mention = False
     if message.entities:
         for entity in message.entities:
             if entity.type == "mention":
@@ -273,9 +292,12 @@ async def should_bot_respond(
 
     # Если это обращение к боту и чат забанен, показываем сообщение
     if (is_reply_to_bot or is_mention) and chat_id in BANNED_CHATS:
-        await message.reply_text(
-            f"⛔️ Этот чат заблокирован.\n\nПричина: {BANNED_CHATS[chat_id]}"
-        )
+        try:
+            await message.reply_text(
+                f"⛔️ Этот чат заблокирован.\n\nПричина: {BANNED_CHATS[chat_id]}"
+            )
+        except Exception as e:
+            logging.error(f"Ошибка при отправке сообщения о бане чата: {e}")
         return False
 
     return is_reply_to_bot or is_mention
@@ -283,6 +305,10 @@ async def should_bot_respond(
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
+        if not update.effective_chat or not update.effective_user or not update.message:
+            logging.warning("Получено обновление без необходимых атрибутов")
+            return
+
         # В начале функции добавим обновление информации о чате
         chat = update.effective_chat
         chat_manager.update_chat(
@@ -352,9 +378,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         logging.error(f"Error in handle_message: {e}")
         sentry_sdk.capture_exception(e)
-        await update.message.reply_text(
-            "Произошла ошибка при обработке сообщения. Пожалуйста, попробуйте позже."
-        )
+        try:
+            if update.message:
+                await update.message.reply_text(
+                    "Произошла ошибка при обработке сообщения. Пожалуйста, попробуйте позже."
+                )
+        except Exception as reply_error:
+            logging.error(f"Ошибка при отправке сообщения об ошибке: {reply_error}")
 
 
 async def init_bot(application):
@@ -411,7 +441,7 @@ def main():
 
     application.job_queue.run_repeating(cleanup_job, interval=3600)
 
-    # Запускаем бота
+    # За��ускаем бота
     application.run_polling()
 
 

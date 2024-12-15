@@ -1,6 +1,7 @@
 import asyncio
 import heapq
 import logging
+from logging.handlers import TimedRotatingFileHandler
 import os
 import re
 from dataclasses import dataclass
@@ -28,8 +29,41 @@ from chat_manager import ChatManager
 load_dotenv()
 client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+
 # Настройка логирования
-logging.basicConfig(level=logging.INFO)
+def setup_logging():
+    """Настройка логирования с ежедневной ротацией"""
+    # Используем абсолютный путь в контейнере
+    log_dir = "/app/logs"
+    log_file = os.path.join(log_dir, "bot.log")
+
+    # Настраиваем форматирование
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+
+    # Создаем handler с ротацией
+    file_handler = TimedRotatingFileHandler(
+        log_file,
+        when="midnight",  # Ротация каждую полночь
+        interval=1,  # Интервал - 1 день
+        backupCount=7,  # Хранить логи за последние 7 дней
+        encoding="utf-8",
+    )
+    file_handler.setFormatter(formatter)
+
+    # Настраиваем вывод в консоль
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+
+    # Настраиваем корневой логгер
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.INFO)
+    root_logger.addHandler(file_handler)
+    root_logger.addHandler(console_handler)
+
+
+setup_logging()
 
 # Загрузка переменных окружения
 BOT_TOKEN = os.getenv("BOT_TOKEN")
@@ -113,7 +147,7 @@ user_threads: Dict[int, ThreadInfo] = {}  # словарь для быстрог
 
 
 async def delete_all_threads():
-    """Удаляет треды из ло��ального хранилища"""
+    """Удаляет треды из локального хранилища"""
     try:
         # Очищаем локальные треды
         for user_id, thread_info in list(user_threads.items()):
@@ -145,7 +179,7 @@ async def reset_thread(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     f"Удален тред {thread_info.thread_id} для пользователя {user_id}"
                 )
             except Exception as e:
-                # Проверяем, ��вляется ли ошибка 404 "No thread found"
+                # Проверяем, является ли ошибка 404 "No thread found"
                 error_message = str(e).lower()
                 if "404" in error_message and "No thread found" in error_message:
                     logging.info(
@@ -246,9 +280,9 @@ async def check_thread_exists(thread_id):
 async def should_bot_respond(
     message: Message, context: ContextTypes.DEFAULT_TYPE
 ) -> bool:
-    # Проверяем, что сообщение существует и содержит нжные атрибуты
+    # Проверяем, что сообщение существует и содержит необходимые атрибуты
     if not message or not message.from_user:
-        logging.warning("Получено сообщение бе�� необходимых атрибутов")
+        logging.warning("Получено сообщение без необходимых атрибутов")
         return False
 
     chat_id = message.chat_id if message.chat else None
@@ -310,7 +344,7 @@ async def should_bot_respond(
     if (is_reply_to_bot or is_mention) and chat_id in BANNED_CHATS:
         try:
             await message.reply_text(
-                f"⛔️ Этот чат заблокирован.\n\n��ричина: {BANNED_CHATS[chat_id]}"
+                f"⛔️ Этот чат заблокирован.\n\nПричина: {BANNED_CHATS[chat_id]}"
             )
         except Exception as e:
             logging.error(f"Ошибка при отправке сообщения о бане чата: {e}")
@@ -341,7 +375,7 @@ async def clean_assistant_response(response: str) -> str:
             r"【\d+:\d+†([^】]+)】", lambda m: f" ({m.group(1)}) ", cleaned
         )
 
-    # Исправляем множест��енные пробелы и переносы строк
+    # Исправляем множественные пробелы и переносы строк
     cleaned = re.sub(r" +", " ", cleaned)  # Множественные пробелы
     cleaned = re.sub(r"\n\s*\n\s*\n", "\n\n", cleaned)  # Множественные переносы
     cleaned = re.sub(r" +\n", "\n", cleaned)  # Пробелы перед переносом
@@ -431,7 +465,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             if update.message:
                 await update.message.reply_text(
-                    "Произошла ошибка при обработке сообщения. Пожалуйста, попробуйте позже."
+                    "Произошла ошибка при обработке сообщения. Пож��луйста, попробуйте позже."
                 )
         except Exception as reply_error:
             logging.error(f"Ошибка при отправке сообщения об ошибке: {reply_error}")

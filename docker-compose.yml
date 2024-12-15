@@ -1,10 +1,10 @@
 services:
   bot:
     logging:
-    driver: "json-file"
-    options:
-      max-size: "10m"
-      max-file: "3"
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     container_name: ${CONTAINER_NAME}
     build: ./src
     env_file:
@@ -12,3 +12,4 @@ services:
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs
+    restart: unless-stopped

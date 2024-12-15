@@ -1,5 +1,10 @@
 services:
   bot:
+    logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "3"
     container_name: ${CONTAINER_NAME}
     build: ./src
     env_file:

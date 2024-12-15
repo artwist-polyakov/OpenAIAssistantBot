@@ -113,7 +113,7 @@ user_threads: Dict[int, ThreadInfo] = {}  # словарь для быстрог
 
 
 async def delete_all_threads():
-    """Удаляет треды из ло��ального хранилища"""
+    """Удаляет треды из локального хранилища"""
     try:
         # Очищаем локальные треды
         for user_id, thread_info in list(user_threads.items()):
@@ -145,9 +145,16 @@ async def reset_thread(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     f"Удален тред {thread_info.thread_id} для пользователя {user_id}"
                 )
             except Exception as e:
-                logging.error(f"Ошибка при удалении треда: {e}")
+                # Проверяем, является ли ошибка 404 "No thread found"
+                error_message = str(e).lower()
+                if "404" in error_message and "No thread found" in error_message:
+                    logging.info(
+                        f"Тред {thread_info.thread_id} уже удален, очищаем из локального хранилища"
+                    )
+                else:
+                    logging.error(f"Ошибка при удалении треда: {e}")
 
-            # Удаляем информацию о треде из структур данных
+            # В любом случае удаляем информацию о треде из структур данных
             if user_id in user_threads:
                 del user_threads[user_id]
 
@@ -187,17 +194,27 @@ async def cleanup_old_threads():
             for thread_info in threads_to_remove:
                 try:
                     await client.beta.threads.delete(thread_info.thread_id)
-                    if thread_info.user_id in user_threads:
-                        del user_threads[thread_info.user_id]
-                    thread_heap.remove(thread_info)
                     logging.info(
                         f"Удален устаревший тред {thread_info.thread_id} "
                         f"пользователя {thread_info.user_id}"
                     )
                 except Exception as e:
-                    logging.error(
-                        f"Ошибка при удалении треда {thread_info.thread_id}: {e}"
-                    )
+                    # Проверяем, является ли ошибка 404 "No thread found"
+                    error_message = str(e).lower()
+                    if "404" in error_message and "No thread found" in error_message:
+                        logging.info(
+                            f"Тред {thread_info.thread_id} уже удален, очищаем из локального хранилища"
+                        )
+                    else:
+                        logging.error(
+                            f"Ошибка при удалении треда {thread_info.thread_id}: {e}"
+                        )
+
+                # В любом случае удаляем информацию о треде из локальных структур данных
+                if thread_info.user_id in user_threads:
+                    del user_threads[thread_info.user_id]
+                if thread_info in thread_heap:
+                    thread_heap.remove(thread_info)
 
         except Exception as e:
             logging.error(f"Ошибка в процессе очистки: {e}")
@@ -206,7 +223,7 @@ async def cleanup_old_threads():
 
 
 async def update_thread_access(user_id: int, thread_id: str):
-    """Обновление времени ��оследнего доступа к треду"""
+    """Обновление времени последнего доступа к треду"""
     current_time = datetime.now()
 
     # Создаем новый ThreadInfo
@@ -425,7 +442,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def init_bot(application):
-    """Инициализация бота и получение информации о нем"""
+    """Инициализация бота и по��учение информации о нем"""
     global bot_info
     bot_info = await application.bot.get_me()
     logging.info(f"Bot initialized: @{bot_info.username}")
@@ -463,7 +480,7 @@ def main():
         .build()
     )
 
-    # Добавляем обработчики команд
+    # Добавляем о��работчики команд
     application.add_handler(CommandHandler("chatinfo", get_chat_info))
     application.add_handler(
         CommandHandler("reset", reset_thread)

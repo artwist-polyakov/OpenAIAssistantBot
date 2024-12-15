@@ -1,29 +1,29 @@
-import os
 import asyncio
-import logging
 import heapq
-from datetime import datetime, timedelta
+import logging
+import os
+import re
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 from typing import Dict
+
+import sentry_sdk
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
-from telegram import Update, Message
+from sentry_sdk.integrations.logging import LoggingIntegration
+from telegram import Message, Update
 from telegram.constants import ChatAction, ChatType
 from telegram.ext import (
-    ApplicationBuilder,
-    ContextTypes,
-    MessageHandler,
-    CommandHandler,
-    filters,
-    JobQueue,
     Application,
+    ApplicationBuilder,
+    CommandHandler,
+    ContextTypes,
+    JobQueue,
+    MessageHandler,
+    filters,
 )
-import json
-from pathlib import Path
+
 from chat_manager import ChatManager
-import sentry_sdk
-from sentry_sdk.integrations.logging import LoggingIntegration
-import re
 
 load_dotenv()
 client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))

@@ -52,15 +52,10 @@ def setup_logging():
     )
     file_handler.setFormatter(formatter)
 
-    # Настраиваем вывод в консоль
-    console_handler = logging.StreamHandler()
-    console_handler.setFormatter(formatter)
-
     # Настраиваем корневой логгер
     root_logger = logging.getLogger()
     root_logger.setLevel(logging.INFO)
     root_logger.addHandler(file_handler)
-    root_logger.addHandler(console_handler)
 
 
 setup_logging()
@@ -465,7 +460,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             if update.message:
                 await update.message.reply_text(
-                    "Произошла ошибка при обработке сообщения. Пож��луйста, попробуйте позже."
+                    "Произошла ошибка при обработке сообщения. Пожалуйста, попробуйте позже."
                 )
         except Exception as reply_error:
             logging.error(f"Ошибка при отправке сообщения об ошибке: {reply_error}")

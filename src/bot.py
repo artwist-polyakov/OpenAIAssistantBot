@@ -14,6 +14,7 @@ from openai import AsyncOpenAI
 from sentry_sdk.integrations.logging import LoggingIntegration
 from telegram import Message, Update
 from telegram.constants import ChatAction, ChatType
+from telegram.error import Forbidden
 from telegram.ext import (
     Application,
     ApplicationBuilder,
@@ -409,9 +410,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text("У вас нет доступа к боту.")
             return
 
-        await context.bot.send_chat_action(
-            chat_id=update.effective_chat.id, action=ChatAction.TYPING
-        )
+        try:
+            await context.bot.send_chat_action(
+                chat_id=update.effective_chat.id, action=ChatAction.TYPING
+            )
+        except Forbidden:
+            logging.warning(f"User {update.effective_chat.id} blocked the bot")
+            return
 
         # Поверяем существование треда или создаем новый
         thread_info = user_threads.get(user_id)

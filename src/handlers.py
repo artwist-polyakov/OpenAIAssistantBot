@@ -80,8 +80,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logging.warning(f"User {update.effective_chat.id} blocked the bot")
             return
 
-        # Получаем или создаём тред
-        thread_id = await get_or_create_thread(user_id)
+        # Получаем или создаём тред (уникальный для каждого чата + пользователя)
+        chat_id = update.effective_chat.id
+        thread_id = await get_or_create_thread(chat_id, user_id)
 
         # Отправка в OpenAI
         response = await process_with_assistant(thread_id, message_text)
@@ -154,9 +155,10 @@ async def process_with_assistant(thread_id: str, message_text: str) -> str:
 async def reset_thread(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Обработчик команды /reset - сброс треда пользователя."""
     try:
+        chat_id = update.effective_chat.id
         user_id = update.effective_user.id
 
-        if await delete_user_thread(user_id):
+        if await delete_user_thread(chat_id, user_id):
             await update.message.reply_text("✅ История диалога очищена.")
         else:
             await update.message.reply_text("ℹ️ У вас нет активного диалога.")

@@ -4,3 +4,4 @@ python-dotenv==1.0.1
 python-telegram-bot[job-queue]
 sentry-sdk>=2.8.0
 httpx==0.27.2
+tenacity>=8.2.0

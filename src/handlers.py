@@ -6,8 +6,9 @@ from datetime import datetime
 import sentry_sdk
 from telegram import Update
 from telegram.constants import ChatAction
-from telegram.error import Forbidden
+from telegram.error import Forbidden, NetworkError
 from telegram.ext import ContextTypes
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 from access_control import check_rate_limit, should_bot_respond
 from chat_manager import ChatManager
@@ -18,6 +19,17 @@ from utils import clean_assistant_response
 
 # Менеджер чатов
 chat_manager = ChatManager()
+
+
+@retry(
+    retry=retry_if_exception_type(NetworkError),
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=2, max=10),
+    reraise=True
+)
+async def send_reply_with_retry(message, text: str):
+    """Отправка ответа с retry при сетевых ошибках."""
+    await message.reply_text(text)
 
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -89,7 +101,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         # Очищаем и отправляем ответ
         cleaned_response = await clean_assistant_response(response)
-        await update.message.reply_text(cleaned_response)
+        await send_reply_with_retry(update.message, cleaned_response)
 
     except Exception as e:
         logging.error(f"Error in handle_message: {type(e).__name__}: {str(e)[:200]}")

@@ -18,6 +18,16 @@ from utils import setup_logging
 # Настройка логирования
 setup_logging()
 
+
+def sentry_before_send(event, hint):
+    """Фильтрация временных сетевых ошибок из Sentry."""
+    if "exc_info" in hint:
+        exc_type = hint["exc_info"][0]
+        if exc_type and "NetworkError" in exc_type.__name__:
+            return None
+    return event
+
+
 # Инициализация Sentry
 if SENTRY_DSN:
     sentry_sdk.init(
@@ -31,6 +41,7 @@ if SENTRY_DSN:
             ),
         ],
         environment=SENTRY_ENVIRONMENT,
+        before_send=sentry_before_send,
     )
     logging.info("Sentry monitoring initialized")
 
@@ -80,6 +91,9 @@ def main():
             .token(BOT_TOKEN)
             .job_queue(JobQueue())
             .post_init(startup)
+            .connect_timeout(30.0)
+            .read_timeout(30.0)
+            .write_timeout(30.0)
             .build()
         )
 

@@ -6,16 +6,16 @@ from datetime import datetime
 import sentry_sdk
 from telegram import Update
 from telegram.constants import ChatAction
-from telegram.error import Forbidden, NetworkError
+from telegram.error import BadRequest, Forbidden, NetworkError
 from telegram.ext import ContextTypes
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 from access_control import check_rate_limit, should_bot_respond
 from chat_manager import ChatManager
+from citations import ProcessedResponse, process_response_with_citations
 from config import (ASSISTANT_ID, ASSISTANT_TIMEOUT, MAX_MESSAGE_LENGTH,
                     RATE_LIMIT_WINDOW, USERS)
 from thread_manager import client, delete_user_thread, get_or_create_thread
-from utils import clean_assistant_response
 
 # Менеджер чатов
 chat_manager = ChatManager()
@@ -27,9 +27,40 @@ chat_manager = ChatManager()
     wait=wait_exponential(multiplier=1, min=2, max=10),
     reraise=True
 )
-async def send_reply_with_retry(message, text: str):
+async def send_reply_with_retry(message, text: str, parse_mode: str = None):
     """Отправка ответа с retry при сетевых ошибках."""
-    await message.reply_text(text)
+    await message.reply_text(text, parse_mode=parse_mode)
+
+
+async def send_formatted_reply(message, processed: ProcessedResponse):
+    """Отправляет форматированный ответ с citations."""
+    full_text = processed.text
+
+    if processed.footnotes:
+        full_text += processed.footnotes
+
+    # Пробуем отправить с MarkdownV2
+    try:
+        await send_reply_with_retry(message, full_text, parse_mode="MarkdownV2")
+    except BadRequest as e:
+        if "can't parse" in str(e).lower():
+            # Fallback: убираем форматирование и отправляем plain text
+            logging.warning(f"MarkdownV2 parse error, falling back to plain text: {e}")
+            plain_text = remove_markdown_formatting(full_text)
+            await send_reply_with_retry(message, plain_text)
+        else:
+            raise
+
+
+def remove_markdown_formatting(text: str) -> str:
+    """Удаляет форматирование MarkdownV2 из текста."""
+    import re
+    # Убираем escape-символы
+    result = re.sub(r'\\([_*\[\]()~`>#+=|{}.!-])', r'\1', text)
+    # Убираем курсив и жирный
+    result = re.sub(r'_([^_]+)_', r'\1', result)
+    result = re.sub(r'\*([^*]+)\*', r'\1', result)
+    return result
 
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -97,11 +128,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         thread_id = await get_or_create_thread(chat_id, user_id)
 
         # Отправка в OpenAI
-        response = await process_with_assistant(thread_id, message_text)
+        content_block = await process_with_assistant(thread_id, message_text)
 
-        # Очищаем и отправляем ответ
-        cleaned_response = await clean_assistant_response(response)
-        await send_reply_with_retry(update.message, cleaned_response)
+        # Обрабатываем citations и отправляем ответ
+        processed = await process_response_with_citations(content_block)
+        await send_formatted_reply(update.message, processed)
 
     except Exception as e:
         logging.error(f"Error in handle_message: {type(e).__name__}: {str(e)[:200]}")
@@ -115,8 +146,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logging.error(f"Ошибка при отправке сообщения об ошибке: {reply_error}")
 
 
-async def process_with_assistant(thread_id: str, message_text: str) -> str:
-    """Отправляет сообщение ассистенту и ожидает ответ."""
+async def process_with_assistant(thread_id: str, message_text: str):
+    """Отправляет сообщение ассистенту и ожидает ответ. Возвращает content_block."""
     # Добавляем сообщение в Thread
     await client.beta.threads.messages.create(
         thread_id=thread_id, role="user", content=message_text
@@ -159,9 +190,9 @@ async def process_with_assistant(thread_id: str, message_text: str) -> str:
 
         await asyncio.sleep(2)
 
-    # Получение ответа
+    # Получение ответа - возвращаем content_block для обработки annotations
     messages = await client.beta.threads.messages.list(thread_id=thread_id)
-    return messages.data[0].content[0].text.value
+    return messages.data[0].content[0]
 
 
 async def reset_thread(update: Update, context: ContextTypes.DEFAULT_TYPE):

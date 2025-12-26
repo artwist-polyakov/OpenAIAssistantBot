@@ -24,6 +24,12 @@ THREAD_LIFETIME_HOURS = int(os.getenv("THREAD_LIFETIME_HOURS", "24"))
 REMOVE_CHUNKS_FOR_FILES = os.getenv("REMOVE_CHUNKS_FOR_FILES", "links.txt").split(",")
 REMOVE_CHUNK_MARKERS = os.getenv("REMOVE_CHUNK_MARKERS", "true").lower() == "true"
 
+# Настройки citations (источников)
+ENABLE_CITATIONS = os.getenv("ENABLE_CITATIONS", "true").lower() == "true"
+CITATIONS_SHOW_QUOTES = os.getenv("CITATIONS_SHOW_QUOTES", "true").lower() == "true"
+CITATIONS_MAX_QUOTE_LENGTH = int(os.getenv("CITATIONS_MAX_QUOTE_LENGTH", "200"))
+FILE_CACHE_TTL_HOURS = int(os.getenv("FILE_CACHE_TTL_HOURS", "24"))
+
 # Лимиты и таймауты
 MAX_MESSAGE_LENGTH = int(os.getenv("MAX_MESSAGE_LENGTH", "10000"))
 ASSISTANT_TIMEOUT = int(os.getenv("ASSISTANT_TIMEOUT", "120"))

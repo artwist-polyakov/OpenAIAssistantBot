@@ -9,6 +9,6 @@ RUN pip cache purge && \
     pip install --no-cache-dir httpx==0.27.2 && \
     pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY src/ .
 
 CMD ["python", "bot.py"]

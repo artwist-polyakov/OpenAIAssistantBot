@@ -1,0 +1,13 @@
+.git
+.github
+.idea
+.env
+.env.*
+data
+logs
+docs
+tests
+__pycache__
+*.pyc
+.venv
+*.log

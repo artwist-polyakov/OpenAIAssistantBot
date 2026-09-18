@@ -1,7 +1,8 @@
 version: 2
 updates:
+  # Version bumps off; security update PRs ignore this limit.
   - package-ecosystem: pip
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 0
